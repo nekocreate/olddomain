@@ -3,23 +3,17 @@
   <meta name="robots" content="noimageindex" />
   <meta name="googlebot" content="noimageindex" />
   <meta name="robots" content="nosnippet">
-
   <style>
   div.code {background-color: #c0c0c0; width: 400px;}
   div.wrap {width: 600px;}
   </style>
-
-<script src="/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" data-turbolinks-track="true"><
-
-<script type="text/javascript" src="/assets/javascripts/fixed_midashi.js"></script>
-<script src="/assets/javascripts/jquery.tablesorter.min.js"></script>
-<script>
-$(function() {
-	$('#sorter').tablesorter();
-});
-</script>
-
-
+  <script type="text/javascript" src="/assets/javascripts/fixed_midashi.js"></script>
+  <script src="/assets/javascripts/jquery.tablesorter.min.js"></script>
+  <script>
+  $(function() {
+  	$('#sorter').tablesorter();
+  });
+  </script>
   <style type="text/css" media="screen">
     div.scroll_div { overflow: auto; }
   </style>
@@ -29,16 +23,13 @@ $(function() {
   <body onLoad="FixedMidashi.create();">
 <% end %>
 
-
 <h1>Domains#index</h1>
 <p>ここにドメインの詳細テーブル表を表示させる</p>
-
 
 <%= form_tag import_domains_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "インポート" %>
 <% end %>
-
 
 <hr>
 
@@ -147,4 +138,3 @@ $(function() {
 	});
 });
 </script>
-
