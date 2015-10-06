@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Olddomain</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <% if content_for?(:head) %>
+    <%= yield :head %>
+  <% end %>
+</head>
+
+<% if content_for?(:body) %>
+  <%= yield :body %>
+<% else %>
+  <body>
+<% end %>
+
+  <div id="notice">
+    <% flash.each do |message_type, message| %><!-- フラッシュメッセージを表示ここから -->
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %><!-- フラッシュメッセージを表示ここまで -->
+  </div>
+
+  <%= link_to "top", root_path %><br />
+  <%= link_to "ドメイン一覧(お試し及び本会員用)", domains_path, target: "_blank" %>
+
+<%= yield %>
+
+
+  <!-- フラッシュメッセージ消す -->
+  <script>
+  $(function() {
+  	setTimeout(function() {
+  		$('#notice').fadeOut("slow");
+  	}, 1000);
+  });
+  </script>
+</body>
+</html>

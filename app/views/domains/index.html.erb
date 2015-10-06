@@ -1,0 +1,150 @@
+<% content_for(:head) do %>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <meta name="robots" content="noimageindex" />
+  <meta name="googlebot" content="noimageindex" />
+  <meta name="robots" content="nosnippet">
+
+  <style>
+  div.code {background-color: #c0c0c0; width: 400px;}
+  div.wrap {width: 600px;}
+  </style>
+
+<script src="/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" data-turbolinks-track="true"><
+
+<script type="text/javascript" src="/assets/javascripts/fixed_midashi.js"></script>
+<script src="/assets/javascripts/jquery.tablesorter.min.js"></script>
+<script>
+$(function() {
+	$('#sorter').tablesorter();
+});
+</script>
+
+
+  <style type="text/css" media="screen">
+    div.scroll_div { overflow: auto; }
+  </style>
+<% end %>
+
+<% content_for(:body) do %>
+  <body onLoad="FixedMidashi.create();">
+<% end %>
+
+
+<h1>Domains#index</h1>
+<p>ここにドメインの詳細テーブル表を表示させる</p>
+
+
+<%= form_tag import_domains_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
+
+
+<hr>
+
+<div class="scroll_div">
+<table _fixedhead="rows:1; cols:1" id="sorter" class="tablesorter" onclick="ChgTR(event)"><!-- クラスを追加する -->
+  <thead>
+    <tr>
+      <th>ドメイン</th>
+      <th>PR</th>
+      <th>BL詳細</th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">wayback</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">SEOチェキ</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Index</div></div></th>
+      <th>Do<br />follow<br />PR数</th>
+      <th>No<br />follow<br />PR数</th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">IP分散率</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">重複しないIP数</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">全IP数</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">中国リンク</div></div></th>
+      <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">要注意</div></div></th> -->
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・Rank</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・DA</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・PA</div></div></th>
+      <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Ahr・DR</div></div></th> -->
+      <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Ahr・BLD</div></div></th> -->
+      <th>AWY</th>
+      <th>その他</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @domains.each do |d| %>
+    <tr>
+      <td nowrap><input name="c1" type="checkbox"><%= d.name %></td><%# name %>
+      <td><%= d.pr %></td><%# pr %>
+      <!-- <td nowrap><a href="domain/bigcatphotography_org.html" class="popup">BL詳細</a></td> --><%# BL詳細 %>
+      <td nowrap><%= link_to "BL詳細", "#", class: "popup" %></td><%# BL詳細 %>
+      <!-- <td nowrap><a href="http://web.archive.org/web/*/bigcatphotography.org" class="popup">wybk</a></td> --><%# wayback %>
+      <td nowrap><%= link_to "wybk", d.wayback, class: "popup" %></td><%# wayback %>
+      <!-- <td nowrap><a href="http://seocheki.net/site-check.php?u=www.bigcatphotography.org" class="popup">ﾁｪｷ</a></td> --><%# seocheki %>
+      <td nowrap><%= link_to "ﾁｪｷ", d.seocheki, class: "popup" %></td><%# seocheki %>
+      <td><%= d.index_count %></td><%# index_count %>
+      <td><%= d.dofollow_pr %></td><%# dofollow_pr %>
+      <td><%= d.nofollow_pr %></td><%# nofollow_pr %>
+      <td><%= d.ip_bunsanritsu %>%</td><%# IP分散率 ip_bunsanritsu %>
+      <td><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
+      <td><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
+      <td><%= d.china %></td><%# china 中国リンク %>
+      <!-- <td></td> --><%# 要注意 %>
+      <td><%= d.moz_rank %></td><%# moz_rank %>
+      <td><%= d.moz_da %></td><%# moz_da %>
+      <td><%= d.moz_pa %></td><%# moz_pa %>
+      <!-- <td>33</td> --><%# ahref dr %>
+      <!-- <td>17</td> --><%# ahref bld %>
+      <td><%= d.awy %></td><%# awy %>
+      <td nowrap></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<script>
+$(function() {
+
+	$(":checked").parent().css("background","#ffcccc");
+	$("input").click(function(e) {
+		var t = e.target.type;
+		var chk = $(this).attr('checked');
+		var name = $(this).attr('name');
+		if(t == 'checkbox') {
+			if(chk == true){
+				$(this).parent().css('background', '#ffcccc');
+			} else {
+				$(this).parent().css('background-color', '');
+			}
+			return true;
+		} else if(t == 'radio') {
+			if(chk == true){
+				$("input[name=" + name + "]").parent().css("background-color","");
+				$(this).parent().css("background","#ffcccc");
+			}
+			return true;
+		}
+	});
+
+});
+</script>
+
+
+<script language="Javascript">
+function Click_Sub1(check) {
+    for(i = 0; i < document.all.c1.length; i++){
+        document.all.c1[i].checked = check;
+    }
+}
+</script>
+
+
+<script type="text/javascript">
+//popupで別窓
+$(function() {
+	$(".popup").click(function(){
+        	window.open(this.href, "waku1","width=500,height=700,resizable=yes,scrollbars=yes,createnew=no");
+		return false;
+	});
+});
+</script>
+

@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  pr: 1
+  wayback: MyString
+  seocheki: MyString
+  index_count: MyString
+  dofollow_pr: MyString
+  nofollow_pr: MyString
+  awy: MyString
+  china: MyString
+  ip_bunsanritsu: MyString
+  ip_unique_count: MyString
+  ip_all_count: MyString
+  moz_rank: MyString
+  moz_da: MyString
+  moz_pa: MyString
+
+two:
+  name: MyString
+  pr: 1
+  wayback: MyString
+  seocheki: MyString
+  index_count: MyString
+  dofollow_pr: MyString
+  nofollow_pr: MyString
+  awy: MyString
+  china: MyString
+  ip_bunsanritsu: MyString
+  ip_unique_count: MyString
+  ip_all_count: MyString
+  moz_rank: MyString
+  moz_da: MyString
+  moz_pa: MyString
