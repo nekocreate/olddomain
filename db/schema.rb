@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006041100) do
+ActiveRecord::Schema.define(version: 20151006200754) do
+
+  create_table "backlinks", force: :cascade do |t|
+    t.string   "domain"
+    t.string   "pr"
+    t.string   "ip"
+    t.string   "followcheck"
+    t.string   "obl"
+    t.string   "bl_url"
+    t.string   "bl_title"
+    t.string   "anchor_text"
+    t.string   "href_url"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "domains", force: :cascade do |t|
     t.string   "name"

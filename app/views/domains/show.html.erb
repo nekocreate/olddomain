@@ -1,0 +1,60 @@
+<% content_for(:body) do %>
+  <body onLoad="FixedMidashi.create();">
+<% end %>
+
+<h1><%= @domain.name %>の調査結果</h1>
+このドメインのPR：<%= @domain.pr %><br />
+バックリンクの全IP数：<%= @domain.ip_all_count %><br />
+バックリンクのクラスCレベルで重複しないIP数：<%= @domain.ip_unique_count %><br />
+バックリンクのクラスCレベルIP分散率：<%= @domain.ip_bunsanritsu %><br />
+＜Dofollow PR＞：<%= @domain.dofollow_pr %><br />
+＜Nofollow PR＞：<%= @domain.nofollow_pr %><br />
+Waybackmachine登録年：<%= @domain.awy %><br />
+
+
+<table _fixedhead="rows:1; cols:1">
+<thead>
+<tr>
+<th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">PR</div></div></th>
+<th>IP</th>
+<th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">follow</div></div></th>
+<th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">OBL</div></div></th>
+<th>BL種類</th>
+<th>BL_URL</th>
+<th>アンカーテキスト</th>
+<th>被リンクURL</th>
+</tr>
+</thead>
+<tbody>
+
+<% @backlinks.each do |b| %>
+    <%# followcheckの置換 ################### %>
+    <% if b.followcheck == "do" %>
+        <% b.followcheck = "○" %>
+    <% else %>
+        <% b.followcheck = "" %>
+    <% end %>
+    
+    <%# ダブルコーテーションやカンマなどの置換 ################################## %>
+    <% b.bl_title = b.bl_title.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% b.bl_url = b.bl_url.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% b.anchor_text = b.anchor_text.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% b.href_url = b.href_url.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+
+    <tr>
+    <td><%= b.pr %></td>
+    <td class="ip" width="100" style="word-break:break-all;"><%= b.ip %></td>
+    <td class="follow"><%= b.followcheck %></td>
+    <td class="obl"><%= b.obl.html_safe %></td>
+    <td class="blsyurui"></td>
+    <td class="bl" width="200" style="word-break:break-all;"><%= b.bl_title %><br />
+        <!-- <a class="blurl" href="http://mublag.boinkor.net/friends?newer=1&since=530770379" target="_blank">http://mublag.boinkor.net/friends?newer=1&since=530770379</a> -->
+        <%= link_to b.bl_url, b.bl_url, class: "blurl", target: "_blank" %></td>
+    <td class="anchortext" width="200" style="word-break:break-all;"><%= b.anchor_text %></td>
+    <td class="href" width="200" style="word-break:break-all;"><%= b.href_url %></td>
+    </tr>
+<% end %>
+
+</tbody>
+</table>
+<p style="margin:150px;"></p>

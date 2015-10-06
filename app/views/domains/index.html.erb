@@ -25,12 +25,18 @@
 
 <h1>Domains#index</h1>
 <p>ここにドメインの詳細テーブル表を表示させる</p>
-
+<h3>ドメインcsvインポート</h3>
 <%= form_tag import_domains_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "インポート" %>
 <% end %>
 
+<hr>
+<h3>バックリンクcsvインポート</h3>
+<%= form_tag import_backlinks_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
 <hr>
 
 <div class="scroll_div">
@@ -65,7 +71,7 @@
       <td nowrap><input name="c1" type="checkbox"><%= d.name %></td><%# name %>
       <td><%= d.pr %></td><%# pr %>
       <!-- <td nowrap><a href="domain/bigcatphotography_org.html" class="popup">BL詳細</a></td> --><%# BL詳細 %>
-      <td nowrap><%= link_to "BL詳細", "#", class: "popup" %></td><%# BL詳細 %>
+      <td nowrap><%= link_to "BL詳細", domain_path(d.id), class: "popup" %></td><%# BL詳細 %>
       <!-- <td nowrap><a href="http://web.archive.org/web/*/bigcatphotography.org" class="popup">wybk</a></td> --><%# wayback %>
       <td nowrap><%= link_to "wybk", d.wayback, class: "popup" %></td><%# wayback %>
       <!-- <td nowrap><a href="http://seocheki.net/site-check.php?u=www.bigcatphotography.org" class="popup">ﾁｪｷ</a></td> --><%# seocheki %>

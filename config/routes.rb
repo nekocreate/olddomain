@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   
-  resources :domains
+  # resources :domains
 
   resources :domains do
     member do
@@ -14,11 +14,22 @@ Rails.application.routes.draw do
       post "import"
     end
   end
-  
+
+  resources :backlinks do
+    member do
+      # get 'test' # テスト用
+    end
+    
+    collection do
+      post "import"
+    end
+  end
+
+ 
   
   # createはテープルに登録する newは登録画面 indexはドメインのテーブル表1ページで表示する
   # showアクションを使わないのは、showアクションはrouteで生成されるurlのパターンに「:id」を含んでしまうため。
-  resources :domains, only: [:create, :new, :index]
+  resources :domains, only: [:create, :new, :index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

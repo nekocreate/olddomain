@@ -24,8 +24,12 @@ class DomainsController < ApplicationController
   end
   
   # ドメインデータの詳細を表示する
-  #def show
-  #end
+  def show
+    @domain = Domain.find(params[:id])
+    @domain_name = @domain.name
+    # @backlinks = Backlink.find_by(domain: @domain.name)
+    @backlinks = Backlink.where(domain: @domain.name)
+  end
   
   def index
     @domains = Domain.all

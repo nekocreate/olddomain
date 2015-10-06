@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  domain: MyString
+  pr: MyString
+  ip: MyString
+  followcheck: MyString
+  obl: MyString
+  bl_url: MyString
+  bl_title: MyString
+  anchor_text: MyString
+  href_url: MyString
+
+two:
+  domain: MyString
+  pr: MyString
+  ip: MyString
+  followcheck: MyString
+  obl: MyString
+  bl_url: MyString
+  bl_title: MyString
+  anchor_text: MyString
+  href_url: MyString
