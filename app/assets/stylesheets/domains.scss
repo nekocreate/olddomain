@@ -65,6 +65,7 @@ div.tate-separator{
 	height:2em;
 }
 
+
 /* フォントサイズ変更時のフォント位置アジャスト用 */
 .tate-line .font08{ font-size:8pt; }
 .tate-line .font10{ font-size:10pt; }
@@ -92,6 +93,7 @@ div.tate-separator{
 
 
 /* tables */
+
 table.tablesorter {
 	font-family:arial;
 	background-color: #CDCDCD;
@@ -131,6 +133,8 @@ table.tablesorter thead tr .headerSortDown {
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
 background-color: #8dbdd8;
 }
+
+
 
 
 /*テーブルを1行おきに背景色を変える*/

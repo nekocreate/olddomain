@@ -1,22 +1,22 @@
 <% content_for(:head) do %>
-  <meta name="robots" content="noindex,nofollow,noarchive" />
-  <meta name="robots" content="noimageindex" />
-  <meta name="googlebot" content="noimageindex" />
-  <meta name="robots" content="nosnippet">
-  <style>
-  div.code {background-color: #c0c0c0; width: 400px;}
-  div.wrap {width: 600px;}
-  </style>
-  <script type="text/javascript" src="/assets/javascripts/fixed_midashi.js"></script>
-  <script src="/assets/javascripts/jquery.tablesorter.min.js"></script>
-  <script>
-  $(function() {
-  	$('#sorter').tablesorter();
-  });
-  </script>
-  <style type="text/css" media="screen">
+    <%= javascript_include_tag 'fixed_midashi.js' %>
+    <%= javascript_include_tag 'jquery.tablesorter.min.js' %>
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="robots" content="noimageindex" />
+    <meta name="googlebot" content="noimageindex" />
+    <meta name="robots" content="nosnippet">
+    <style>
+    div.code {background-color: #c0c0c0; width: 400px;}
+    div.wrap {width: 600px;}
+    </style>
+    <script>
+    $(function() {
+      $('#sorter').tablesorter();
+    });
+    </script>
+    <style type="text/css" media="screen">
     div.scroll_div { overflow: auto; }
-  </style>
+    </style>
 <% end %>
 
 <% content_for(:body) do %>
