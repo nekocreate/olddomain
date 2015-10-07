@@ -12,3 +12,32 @@
     ないよ
 <% end %>
 
+<hr>
+<p>文字　切り取り</p>
+<%= domain = "Unicist-Library.org" %><br />
+<% str = domain %>
+
+<% p = str.index(".") %><%# カンマの位置 %>
+
+<% kiritori_str = str[0..p-1] %><br />
+
+<% kiritori_str_length = kiritori_str.length %><br />
+
+<%= chikan_taisyou_str = kiritori_str[1..kiritori_str_length-2] %><br />
+
+<% chikan_taisyou_str_length = chikan_taisyou_str.length %><br />
+
+<% fusemoji = "*" %>
+<% chikan_taisyou_str_length.times{ fusemoji = fusemoji + "*" } %>
+<%= fusemoji %>
+<hr>
+
+
+<% domain = "Unicist-Library.org" %>
+<% domain.downcase! %>
+<% str = domain %>
+<% p = str.index(".") %><%# カンマの位置 %>
+<% chikan_str = str[1..p-2] %><%# domain名の文字列の先頭末尾の文字列を除外して切り取る %>
+<% fusemoji = "*" %>
+<% chikan_str.length.times{ fusemoji = fusemoji + "*" } %>
+<%= domain = domain.gsub(chikan_str,fusemoji) %>

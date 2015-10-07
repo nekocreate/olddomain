@@ -1,2 +1,269 @@
 <h1>Welcome#index</h1>
 <p>トップページ</p>
+
+
+
+<h1>ドメイン一覧 Domains#index</h1>
+<div class="scroll_div">
+<table _fixedhead="rows:1; cols:1" id="sorter" class="tablesorter" onclick="ChgTR(event)"><!-- クラスを追加する -->
+  <thead>
+    <tr>
+      <th>ドメイン</th>
+      <th>PR</th>
+      <th>BL詳細</th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">wayback</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">SEOチェキ</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Index</div></div></th>
+      <th>Do<br />follow<br />PR数</th>
+      <th>No<br />follow<br />PR数</th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">IP分散率</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">重複しないIP数</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">全IP数</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">中国リンク</div></div></th>
+      <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">要注意</div></div></th> -->
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・Rank</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・DA</div></div></th>
+      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・PA</div></div></th>
+      <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Ahr・DR</div></div></th> -->
+      <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Ahr・BLD</div></div></th> -->
+      <th>AWY</th>
+      <th>その他</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @domains.each do |d| %>
+  
+    <%# このドメインのバックリンクのURLを全て取得して一つにまとめる処理 ここから ###################################### %>
+    <% backlinks = @backlinks.where(domain: d.name) %><%# このドメインnameを持つ全てのバックリンクオブジェクトを格納 %>
+    <% backlink_urls = "" %><%# 変数を空として初期化 %>
+    <% backlinks.each do |b| %>
+      <% backlink_urls = backlink_urls + b.bl_url %><%# 文字列として繋げていき、最終的には一つにまとめる %>
+    <% end %>
+    <%# このドメインのバックリンクのURLを全て取得して一つにまとめる処理 ここまで ###################################### %>
+
+    <%# バックリンクの種類判定の処理 ここから ############################################### %>
+    <% wikipedia = "" %>
+    <% china = "" %>
+    <% ac = "" %>
+    <% or_ = "" %>
+    <% go = "" %>
+    <% gr = "" %>
+    <% nic = "" %>
+    <% facebook = "" %>
+    <% twitter = "" %>
+    <% gov = "" %>
+    <% edu = "" %>
+    <% museum = "" %>
+    <% musicmoz = "" %>
+    <% dmoz = "" %>
+    <% youtube = "" %>
+    <% linkedin = "" %>
+    <% tumblr = "" %>
+    <% myspace = "" %>
+    <% plus_google = "" %>
+    <% pinterest = "" %>
+    <% nytimes = "" %>
+    <% reuters = "" %>
+    <% washingtonpost = "" %>
+    <% nbc = "" %>
+    <% matome_naver = "" %>
+    <% okwave = "" %>
+
+    <% if backlink_urls.include?(".wikipedia.org") %><%# wikipedia %>
+        <% wikipedia = "[wikipedia]" %>
+    <% end %>
+
+    <% if backlink_urls.include?(".cn/") || backlink_urls.include?(".cn.") %><%# 中国 china のみテーブルの別の列で表示させる %>
+        <% china = "[中国]" %>
+    <% end %>
+
+    <% if backlink_urls.include?(".ac.") %>
+        <% ac = "[.ac]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".or.") %>
+        <% or_ = "[.or]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".go.") %>
+        <% go = "[.go]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".gr.") %>
+        <% gr = "[.gr]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".nic.") %>
+        <% nic = "[.nic]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".facebook.com") %>
+        <% facebook = "[facebook]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?("//twitter.com") || backlink_urls.include?(".twitter.com") %>
+        <% twitter = "[twitter]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".gov/") || backlink_urls.include?(".gov.") %>
+        <% gov = "[.gov]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".edu/") || backlink_urls.include?(".edu.") %>
+        <% edu = "[.edu]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".museum/") || backlink_urls.include?(".museum.") %>
+        <% museum = "[.museum]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?("//musicmoz.org") || backlink_urls.include?(".musicmoz.org") %>
+        <% musicmoz = "[musicmoz]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?("//dmoz.org") || backlink_urls.include?(".dmoz.org") %>
+        <% dmoz = "[dmoz]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".youtube.com") %>
+        <% youtube = "[youtube]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".linkedin.com") %>
+        <% linkedin = "[linkedin]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".tumblr") %>
+        <% tumblr = "[tumblr]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?("//myspace.com") %>
+        <% myspace = "[myspace]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?("plus.google.com") %>
+        <% plus_google = "[googleplus]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".pinterest.com") %>
+        <% pinterest = "[pinterest]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".nytimes.com") %>
+        <% nytimes = "[nytimes]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".reuters.com") %>
+        <% reuters = "[reuters]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".washingtonpost.com") %>
+        <% washingtonpost = "[washingtonpost]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".nbc.com") %>
+        <% nbc = "[nbc]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?(".matome.naver.jp/") %>
+        <% matome_naver = "[naverまとめ]" %>
+    <% end %>
+    
+    <% if backlink_urls.include?("okwave.jp/") %>
+        <% okwave = "[okwave]" %>
+    <% end %>
+    
+    <%# china のみテーブルの別の列で表示させる %>
+    <% bl_syurui = wikipedia + ac + or_ + go + gr + nic + facebook + twitter + gov + edu + museum + musicmoz + dmoz + youtube + linkedin + tumblr + myspace + plus_google + pinterest + nytimes + reuters + washingtonpost + nbc + matome_naver + okwave %>
+    <%# バックリンクの種類判定の処理 ここまで ############################################### %>
+
+
+    <%# ドメインの一部を伏せ字にする処理 ここから ############################################### %>
+    <% begin %>
+        <% domain = d.name %>
+        <% domain.downcase! %>
+        <% str = domain %>
+        <% p = str.index(".") %><%# カンマの位置 %>
+        <% chikan_str = str[1..p-2] %><%# domain名の文字列の先頭末尾の文字列を除外して切り取る %>
+        <% fusemoji = "*" %>
+        <% chikan_str.length.times{ fusemoji = fusemoji + "*" } %>
+        <% domain = domain.gsub(chikan_str,fusemoji) %>
+    <% rescue %><% domain = "エラー" %>
+    <% end %>
+    <%# ドメインの一部を伏せ字にする処理 ここまで ############################################### %>
+
+    <tr>
+      <td nowrap><input name="c1" type="checkbox"><%= domain %></td><%# name %>
+      <td><%= d.pr %></td><%# pr %>
+      <td nowrap><%= link_to "BL詳細", "#", class: "" %></td><%# BL詳細 %>
+      <td nowrap><%= link_to "wybk", "#", class: "" %></td><%# wayback %>
+      <td nowrap><%= link_to "ﾁｪｷ", "#", class: "" %></td><%# seocheki %>
+      <td><%= d.index_count %></td><%# index_count %>
+      <td><%= d.dofollow_pr %></td><%# dofollow_pr %>
+      <td><%= d.nofollow_pr %></td><%# nofollow_pr %>
+      <td><%= d.ip_bunsanritsu %>%</td><%# IP分散率 ip_bunsanritsu %>
+      <td><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
+      <td><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
+      <td><%= china %></td><%# china 中国リンク %>
+      <!-- <td></td> --><%# 要注意 %>
+      <td><%= d.moz_rank %></td><%# moz_rank %>
+      <td><%= d.moz_da %></td><%# moz_da %>
+      <td><%= d.moz_pa %></td><%# moz_pa %>
+      <!-- <td>33</td> --><%# ahref dr %>
+      <!-- <td>17</td> --><%# ahref bld %>
+      <td><%= d.awy %></td><%# awy %>
+      <td nowrap><%= bl_syurui %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<script>
+$(function() {
+
+	$(":checked").parent().css("background","#ffcccc");
+	$("input").click(function(e) {
+		var t = e.target.type;
+		var chk = $(this).attr('checked');
+		var name = $(this).attr('name');
+		if(t == 'checkbox') {
+			if(chk == true){
+				$(this).parent().css('background', '#ffcccc');
+			} else {
+				$(this).parent().css('background-color', '');
+			}
+			return true;
+		} else if(t == 'radio') {
+			if(chk == true){
+				$("input[name=" + name + "]").parent().css("background-color","");
+				$(this).parent().css("background","#ffcccc");
+			}
+			return true;
+		}
+	});
+
+});
+</script>
+
+
+<script language="Javascript">
+function Click_Sub1(check) {
+    for(i = 0; i < document.all.c1.length; i++){
+        document.all.c1[i].checked = check;
+    }
+}
+</script>
+
+
+<script type="text/javascript">
+//popupで別窓
+$(function() {
+	$(".popup").click(function(){
+        	window.open(this.href, "waku1","width=500,height=700,resizable=yes,scrollbars=yes,createnew=no");
+		return false;
+	});
+});
+</script>
+
