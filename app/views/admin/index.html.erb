@@ -1,0 +1,13 @@
+<h3>ドメインcsvインポート</h3>
+<%= form_tag import_domains_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
+
+<hr>
+<h3>バックリンクcsvインポート</h3>
+<%= form_tag import_backlinks_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "インポート" %>
+<% end %>
+<hr>

@@ -22,8 +22,10 @@
     <% end %><!-- フラッシュメッセージを表示ここまで -->
   </div>
 
+
   <%= link_to "top", root_path %><br />
-  <%= link_to "ドメイン一覧(お試し及び本会員用)", domains_path, target: "_blank" %>
+  <%= link_to "ドメイン一覧(お試し及び本会員用)", domains_path, target: "_blank" %><br />
+  <%= link_to "管理画面", admin_index_path %><br />
 
 <%= yield %>
 

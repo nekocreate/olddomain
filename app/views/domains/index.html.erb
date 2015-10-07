@@ -23,24 +23,7 @@
   <body onLoad="FixedMidashi.create();">
 <% end %>
 
-
-
-<h1>Domains#index</h1>
-<p>ここにドメインの詳細テーブル表を表示させる</p>
-<h3>ドメインcsvインポート</h3>
-<%= form_tag import_domains_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "インポート" %>
-<% end %>
-
-<hr>
-<h3>バックリンクcsvインポート</h3>
-<%= form_tag import_backlinks_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "インポート" %>
-<% end %>
-<hr>
-
+<h1>ドメイン一覧 Domains#index</h1>
 <div class="scroll_div">
 <table _fixedhead="rows:1; cols:1" id="sorter" class="tablesorter" onclick="ChgTR(event)"><!-- クラスを追加する -->
   <thead>

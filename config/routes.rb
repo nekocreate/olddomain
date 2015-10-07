@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   end
 
  
+  resources :admin, only: [:index]
   
   # createはテープルに登録する newは登録画面 indexはドメインのテーブル表1ページで表示する
   # showアクションを使わないのは、showアクションはrouteで生成されるurlのパターンに「:id」を含んでしまうため。
