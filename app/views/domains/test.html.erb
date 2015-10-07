@@ -1,0 +1,14 @@
+
+<hr />
+<% moji = "web Oficial" %>
+
+<%= moji.match(/of/i).inspect %>
+
+
+<hr>
+<% if moji.match(/of/i) || moji.match(/ke/i) %>
+    あるよ
+<% else %>
+    ないよ
+<% end %>
+

@@ -1,3 +1,29 @@
+<% content_for(:head) do %>
+    <style type="text/css">
+        body { font-size: 50%; }
+        table{
+        /* width: 650px; */ /* 表の幅 */
+        margin-top: 5px;
+        border: 1px #c0c0c0 solid; /* 大枠の境界線 */
+        border-collapse: collapse;
+        font-size: 50%;
+        }
+        
+        /* --- 表タイトル --- */
+        table. caption {
+        padding-bottom: 5px; /* 表タイトルの下パディング */
+        }
+        
+        /* --- セル --- */
+        th,
+        td {
+        /* width: 20%; */ /* セルの幅（セルの幅を均等にする場合） */
+        /* padding: 6px 8px; */ /* セルのパディング（上下、左右） */
+        border: 1px #c0c0c0 solid; /* セルの境界線 */
+        }
+    </style>
+<% end %>
+
 <% content_for(:body) do %>
   <body onLoad="FixedMidashi.create();">
 <% end %>
@@ -35,22 +61,182 @@ Waybackmachine登録年：<%= @domain.awy %><br />
         <% b.followcheck = "" %>
     <% end %>
     
-    <%# ダブルコーテーションやカンマなどの置換 ################################## %>
-    <% b.bl_title = b.bl_title.gsub("|comma|",",").gsub("|doublequote|",'"') %>
-    <% b.bl_url = b.bl_url.gsub("|comma|",",").gsub("|doublequote|",'"') %>
-    <% b.anchor_text = b.anchor_text.gsub("|comma|",",").gsub("|doublequote|",'"') %>
-    <% b.href_url = b.href_url.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <%# ダブルクォートやカンマなどの置換 ################################## %>
+    <% if b.bl_title.present? %>
+        <% b.bl_title = b.bl_title.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% end %>
+    
+    <% if b.bl_url.present? %>
+        <% b.bl_url = b.bl_url.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% end %>
+
+    <% if b.anchor_text.present? %>
+        <% b.anchor_text = b.anchor_text.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% end %>
+
+    <% if b.href_url.present? %>
+        <% b.href_url = b.href_url.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% end %>
+    
+    <%# バックリンクの種類判定の処理 ここから ############################################### %>
+    <% wikipedia = "" %>
+    <% china = "" %>
+    <% ac = "" %>
+    <% or_ = "" %>
+    <% go = "" %>
+    <% gr = "" %>
+    <% nic = "" %>
+    <% facebook = "" %>
+    <% twitter = "" %>
+    <% gov = "" %>
+    <% edu = "" %>
+    <% museum = "" %>
+    <% musicmoz = "" %>
+    <% dmoz = "" %>
+    <% youtube = "" %>
+    <% linkedin = "" %>
+    <% tumblr = "" %>
+    <% myspace = "" %>
+    <% plus_google = "" %>
+    <% pinterest = "" %>
+    <% nytimes = "" %>
+    <% reuters = "" %>
+    <% washingtonpost = "" %>
+    <% nbc = "" %>
+    <% matome_naver = "" %>
+    <% okwave = "" %>
+    
+    <% if b.bl_url.include?(".wikipedia.org") %><%# wikipedia %>
+        <% wikipedia = "[wikipedia]" %>
+    <% end %>
+
+    <% if b.bl_url.include?(".cn/") || b.bl_url.include?(".cn.") %><%# 中国 %>
+        <% china = "[中国]" %>
+    <% end %>
+
+    <% if b.bl_url.include?(".ac.") %>
+        <% ac = "[.ac]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".or.") %>
+        <% or_ = "[.or]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".go.") %>
+        <% go = "[.go]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".gr.") %>
+        <% gr = "[.gr]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".nic.") %>
+        <% nic = "[.nic]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".facebook.com") %>
+        <% facebook = "[facebook]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?("//twitter.com") || b.bl_url.include?(".twitter.com") %>
+        <% twitter = "[twitter]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".gov/") || b.bl_url.include?(".gov.") %>
+        <% gov = "[.gov]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".edu/") || b.bl_url.include?(".edu.") %>
+        <% edu = "[.edu]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".museum/") || b.bl_url.include?(".museum.") %>
+        <% museum = "[.museum]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?("//musicmoz.org") || b.bl_url.include?(".musicmoz.org") %>
+        <% musicmoz = "[musicmoz]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?("//dmoz.org") || b.bl_url.include?(".dmoz.org") %>
+        <% dmoz = "[dmoz]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".youtube.com") %>
+        <% youtube = "[youtube]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".linkedin.com") %>
+        <% linkedin = "[linkedin]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".tumblr") %>
+        <% tumblr = "[tumblr]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?("//myspace.com") %>
+        <% myspace = "[myspace]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?("plus.google.com") %>
+        <% plus_google = "[googleplus]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".pinterest.com") %>
+        <% pinterest = "[pinterest]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".nytimes.com") %>
+        <% nytimes = "[nytimes]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".reuters.com") %>
+        <% reuters = "[reuters]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".washingtonpost.com") %>
+        <% washingtonpost = "[washingtonpost]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".nbc.com") %>
+        <% nbc = "[nbc]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?(".matome.naver.jp/") %>
+        <% matome_naver = "[naverまとめ]" %>
+    <% end %>
+    
+    <% if b.bl_url.include?("okwave.jp/") %>
+        <% okwave = "[okwave]" %>
+    <% end %>
+    
+    <% bl_syurui = wikipedia + china + ac + or_ + go + gr + nic + facebook + twitter + gov + edu + museum + musicmoz + dmoz + youtube + linkedin + tumblr + myspace + plus_google + pinterest + nytimes + reuters + washingtonpost + nbc + matome_naver + okwave %>
+    <%# バックリンクの種類判定の処理 ここまで ############################################### %>
+
+    <%# バックリンクの公式サイト判定の処理 ここから ############################################### %>
+    <% official_site = "" %>
+    <% if b.anchor_text.present? %>
+        <% if b.anchor_text.match(/official/i) || b.anchor_text.match(/ufficiale/i) || b.anchor_text.match(/oficial/i) ||
+            b.anchor_text.match(/Offizielle/i) %>
+            <% oficial_site = "[元公式サイト]" + "<br />" %>
+        <% end %>
+    <% end %>
+    <%# バックリンクの公式サイト判定の処理 ここまで ############################################### %>
 
     <tr>
     <td><%= b.pr %></td>
     <td class="ip" width="100" style="word-break:break-all;"><%= b.ip %></td>
     <td class="follow"><%= b.followcheck %></td>
     <td class="obl"><%= b.obl.html_safe %></td>
-    <td class="blsyurui"></td>
+    <td class="blsyurui"><%= bl_syurui %></td>
     <td class="bl" width="200" style="word-break:break-all;"><%= b.bl_title %><br />
         <!-- <a class="blurl" href="http://mublag.boinkor.net/friends?newer=1&since=530770379" target="_blank">http://mublag.boinkor.net/friends?newer=1&since=530770379</a> -->
         <%= link_to b.bl_url, b.bl_url, class: "blurl", target: "_blank" %></td>
-    <td class="anchortext" width="200" style="word-break:break-all;"><%= b.anchor_text %></td>
+    <td class="anchortext" width="200" style="word-break:break-all;">
+        <% if oficial_site %>
+            <%= oficial_site.html_safe %><%# 公式サイトと判断した場合は、HTML <br />をエスケープしないで表示させる %>
+        <% end %>
+        <%= b.anchor_text %></td>
     <td class="href" width="200" style="word-break:break-all;"><%= b.href_url %></td>
     </tr>
 <% end %>

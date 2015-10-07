@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   
+  
   # resources :domains
 
   resources :domains do
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
     
     collection do
       post "import"
+      get 'test'
     end
   end
 

@@ -8,6 +8,8 @@ class DomainsController < ApplicationController
   def create
   end
   
+  def test
+  end
   
   
   # csvをインポートする
