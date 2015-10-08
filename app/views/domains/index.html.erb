@@ -5,10 +5,10 @@
     <meta name="robots" content="noimageindex" />
     <meta name="googlebot" content="noimageindex" />
     <meta name="robots" content="nosnippet">
-    <style>
+    <!--<style>
     div.code {background-color: #c0c0c0; width: 400px;}
     div.wrap {width: 600px;}
-    </style>
+    </style>-->
     <script>
     $(function() {
       $('#sorter').tablesorter();
@@ -23,34 +23,35 @@
   <body onLoad="FixedMidashi.create();">
 <% end %>
 
-<h1>ドメイン一覧 Domains#index</h1>
+<h1 class="h3">ドメイン一覧 Domains#index</h1>
 <div class="scroll_div">
-<table _fixedhead="rows:1; cols:1" id="sorter" class="tablesorter" onclick="ChgTR(event)"><!-- クラスを追加する -->
+<table _fixedhead="rows:1; cols:1" id="sorter" class="table-bordered tablesorter">
   <thead>
     <tr>
-      <th>ドメイン</th>
-      <th>PR</th>
-      <th>BL詳細</th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">wayback</div></div></th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">SEOチェキ</div></div></th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Index</div></div></th>
-      <th>Do<br />follow<br />PR数</th>
-      <th>No<br />follow<br />PR数</th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">IP分散率</div></div></th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">重複しないIP数</div></div></th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">全IP数</div></div></th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">中国リンク</div></div></th>
+      <th class="domain">ドメイン</th>
+      <th class="pr">PR</th>
+      <th class="blsyousai">BL<br />詳細</th>
+      <th class="wayback">wayback</th>
+      <th class="cheki">SEO<br />チェキ</th>
+      <th class="index_count"><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Index</div></div></th>
+      <th class="dofollow_pr">Do<br />follow<br />PR数</th>
+      <th class="nofollow_pr">No<br />follow<br />PR数</th>
+      <th class="ip_bunsanritsu"><div class="tate-area" style="font-size:6pt;"><div class="tate-line">IP分散率</div></div></th>
+      <th class="ip_unique_count"><div class="tate-area" style="font-size:6pt;"><div class="tate-line">重複しないIP数</div></div></th>
+      <th class="ip_all_count"><div class="tate-area" style="font-size:6pt;"><div class="tate-line">全IP数</div></div></th>
+      <th class="china"><div class="tate-area" style="font-size:6pt;"><div class="tate-line">中国リンク</div></div></th>
       <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">要注意</div></div></th> -->
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・Rank</div></div></th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・DA</div></div></th>
-      <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・PA</div></div></th>
+      <th class="moz_rank"><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・Rank</div></div></th>
+      <th class="moz_da"><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・DA</div></div></th>
+      <th class="moz_pa"><div class="tate-area" style="font-size:6pt;"><div class="tate-line">MOZ・PA</div></div></th>
       <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Ahr・DR</div></div></th> -->
       <!-- <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">Ahr・BLD</div></div></th> -->
-      <th>AWY</th>
+      <th class="awy">AWY</th>
       <th>その他</th>
     </tr>
   </thead>
   <tbody>
+  <% each_count = 0 %>    
   <% @domains.each do |d| %>
   
     <%# このドメインのバックリンクのURLを全て取得して一つにまとめる処理 ここから ###################################### %>
@@ -202,72 +203,73 @@
 
 
     <tr>
-      <td nowrap><input name="c1" type="checkbox"><%= d.name %></td><%# name %>
-      <td><%= d.pr %></td><%# pr %>
+      <td nowrap class="domain"><input type="checkbox" id="row_<%= each_count+1 %>" value="1" name="row_<%= each_count+1 %>"><%= d.name %></td><%# name %>
+      <td class="pr"><%= d.pr %></td><%# pr %>
       <!-- <td nowrap><a href="domain/bigcatphotography_org.html" class="popup">BL詳細</a></td> --><%# BL詳細 %>
-      <td nowrap><%= link_to "BL詳細", domain_path(d.id), class: "popup" %></td><%# BL詳細 %>
+      <td class="blsyousai"><%= link_to "BL詳細", domain_path(d.id), class: "popup" %></td><%# BL詳細 %>
       <!-- <td nowrap><a href="http://web.archive.org/web/*/bigcatphotography.org" class="popup">wybk</a></td> --><%# wayback %>
-      <td nowrap><%= link_to "wybk", d.wayback, class: "popup" %></td><%# wayback %>
+      <td class="wayback"><%= link_to "wybk", d.wayback, class: "popup" %></td><%# wayback %>
       <!-- <td nowrap><a href="http://seocheki.net/site-check.php?u=www.bigcatphotography.org" class="popup">ﾁｪｷ</a></td> --><%# seocheki %>
-      <td nowrap><%= link_to "ﾁｪｷ", d.seocheki, class: "popup" %></td><%# seocheki %>
-      <td><%= d.index_count %></td><%# index_count %>
-      <td><%= d.dofollow_pr %></td><%# dofollow_pr %>
-      <td><%= d.nofollow_pr %></td><%# nofollow_pr %>
-      <td><%= d.ip_bunsanritsu %>%</td><%# IP分散率 ip_bunsanritsu %>
-      <td><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
-      <td><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
-      <td><%= china %></td><%# china 中国リンク %>
+      <td class="cheki"><%= link_to "ﾁｪｷ", d.seocheki, class: "popup" %></td><%# seocheki %>
+      <td class="index_count"><%= d.index_count %></td><%# index_count %>
+      <td class="dofollow_pr"><%= d.dofollow_pr %></td><%# dofollow_pr %>
+      <td class="nofollow_pr"><%= d.nofollow_pr %></td><%# nofollow_pr %>
+      <td class="ip_bunsanritsu"><%= d.ip_bunsanritsu %>%</td><%# IP分散率 ip_bunsanritsu %>
+      <td class="ip_unique_count"><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
+      <td class="ip_all_count"><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
+      <td class="china"><%= china %></td><%# china 中国リンク %>
       <!-- <td></td> --><%# 要注意 %>
-      <td><%= d.moz_rank %></td><%# moz_rank %>
-      <td><%= d.moz_da %></td><%# moz_da %>
-      <td><%= d.moz_pa %></td><%# moz_pa %>
+      <td class="moz_rank"><%= d.moz_rank %></td><%# moz_rank %>
+      <td class="moz_da"><%= d.moz_da %></td><%# moz_da %>
+      <td class="moz_pa"><%= d.moz_pa %></td><%# moz_pa %>
       <!-- <td>33</td> --><%# ahref dr %>
       <!-- <td>17</td> --><%# ahref bld %>
-      <td><%= d.awy %></td><%# awy %>
+      <td class="awy"><%= d.awy %></td><%# awy %>
       <td nowrap><%= bl_syurui %></td>
     </tr>
+    
+    <% each_count += 1 %>
   <% end %>
   </tbody>
 </table>
 </div>
 
 
+
+
 <script>
 $(function() {
+  // th row
+  $('[id^="row_"]').click(function(event){
+    event.stopPropagation();
+    $auto_line_color();
+  });
+  $('[id^="row_"]').parent('th').click(function(event){
+    $(this).children('[id^="row_"]').trigger('click');
+  });
+  $('label[for^="row_"]').click(function(event) {
+    event.preventDefault();
+  });
 
-	$(":checked").parent().css("background","#ffcccc");
-	$("input").click(function(e) {
-		var t = e.target.type;
-		var chk = $(this).attr('checked');
-		var name = $(this).attr('name');
-		if(t == 'checkbox') {
-			if(chk == true){
-				$(this).parent().css('background', '#ffcccc');
-			} else {
-				$(this).parent().css('background-color', '');
-			}
-			return true;
-		} else if(t == 'radio') {
-			if(chk == true){
-				$("input[name=" + name + "]").parent().css("background-color","");
-				$(this).parent().css("background","#ffcccc");
-			}
-			return true;
-		}
-	});
+  var $auto_line_color = function() {
+    // checked row list
+    var $row_list = $('[id^="row_"]:checked');
+    var $ary_row_index = [];
+    $row_list.each(function() {
+      $ary_row_index.push(parseInt($(this).attr('id').slice(4)));
+    });
 
+    $('table tbody th').css('background', '');
+    $('table tbody td').css('background', '');
+
+    for($j in $ary_row_index) {
+      $('table tbody tr:nth-child('+$ary_row_index[$j]+') th').css('background', '#EFEBC2');
+      $('table tbody tr:nth-child('+$ary_row_index[$j]+') td').css('background', '#EFEBC2');
+    }// end for
+  }// end function
+  $auto_line_color();
 });
 </script>
-
-
-<script language="Javascript">
-function Click_Sub1(check) {
-    for(i = 0; i < document.all.c1.length; i++){
-        document.all.c1[i].checked = check;
-    }
-}
-</script>
-
 
 <script type="text/javascript">
 //popupで別窓

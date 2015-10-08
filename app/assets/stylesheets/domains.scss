@@ -1,19 +1,37 @@
-// Place all the styles related to the domains controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
 @charset 'UTF-8';
 /* 縦書きレイアウト用スタイルシート tate-style.css   
     last updated : Mar 27 , 2013 tyz@freefielder.jp
     http://freefielder.jp http://tategaki.info/
 */
+th { font-size:12px; text-align:center;}
+td { font-size:12px; }
+/*.domain { min-width:200px; max-width:200px !important; }*/
+td.domain { font-size:12px; }
+.pr { width:28px !important; }
+td.pr { text-align:center; }
+th.blsyousai { width:48px !important;}
+td.blsyousai { text-align:center; }
+.wayback { width:53px !important; }
+td.wayback { text-align:center; }
+
+th.cheki { width:46px !important; }
+td.cheki { text-align:center; }
+td.index_count { text-align:center; }
+/*th.dofollow_pr {  }*/
+/*th.nofollow_pr {  }*/
+td.ip_bunsanritsu { font-size:12px !important; }
+td.ip_unique_count { font-size:12px !important; }
+td.ip_all_count { font-size:12px !important; }
+th.china { text-align:center !important; }
+td.moz_rank { font-size:12px !important; }
+td.moz_da { font-size:12px !important; }
+td.moz_pa { font-size:12px !important; }
+td.awy { font-size:12px !important; }
 
 div.tate-area{
 	float:right;
 	font-size:12pt;
-}
-div.tate-area a{
-	color:#119;
-	text-decoration:none;
 }
 
 div.tate-line{
@@ -27,129 +45,31 @@ div.tate-line{
 	word-wrap:break-word;
 	direction:ltr;
 }
-.tate-line font,strong,h1,h2,h3,h4,h5{
-	line-height:1.05em;
-}
 
-.tate-line span.tate-kuto{
-	display:block;
-	width:0.4em;
-	line-height:0.1em !Important;
-	margin-bottom:0.9em;
-	margin-left:0.6em !Important;
-}
-.tate-line span.tate-cho{
-	display:block;
-	-moz-transform:matrix(0, 1, 1, 0, 0, 0);
-	-webkit-transform:matrix(0, 1, 1, 0, 0, 0);
-	-o-transform:matrix(0, 1, 1, 0, 0, 0);
-	transform:matrix(0, 1, 1, 0, 0, 0);
-	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1, mirror=1);
-}
-.tate-line span.tate-komoji{
-	display:block;
-	line-height:0.75em !Important;
-	margin-bottom:0.3em;
-	margin-left:0.11em !Important;
-}
-.tate-line span.tate-kakko{
-	display:block;
-	-moz-transform:rotate(90deg);
-	-webkit-transform:rotate(90deg);
-	-o-transform:rotate(90deg);
-	transform:rotate(90deg);
-	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
-}
-div.tate-separator{
-	clear:both;
-	height:2em;
-}
-
-
-/* フォントサイズ変更時のフォント位置アジャスト用 */
-.tate-line .font08{ font-size:8pt; }
-.tate-line .font10{ font-size:10pt; }
-.tate-line .font12{ font-size:12pt; }
-.tate-line .font14{ font-size:14pt; }
-.tate-line .font18{ font-size:18pt; }
-.tate-line .font24{ font-size:24pt; }
-.tate-line h1{ font-size:24pt; font-weight:bold; }
-.tate-line h2{ font-size:18pt; font-weight:bold; }
-.tate-line h3{ font-size:14pt; font-weight:bold; }
-.tate-line h4{ font-size:12pt; font-weight:bold; }
-
-.tate-line .font08 , .tate-line .font10 , .tate-line .font12 , .tate-line .font14 , .tate-line .font18 , .tate-line .font24 , .tate-line h1 , .tate-line h2 , .tate-line h3 , .tate-line h4 , .tate-line font  {
-	display:block;
-	position:relative;
-	left:50%;
-	width:1em;
-	line-height:1.05em;
-	margin-left:-0.5em;
-} 
-
-
-
-
-
-
-/* tables */
-
-table.tablesorter {
-	font-family:arial;
-	background-color: #CDCDCD;
-	/*margin:10px 0pt 15px;*/
-	margin: 10px 0pt 15px 0pt;
-	font-size: 8pt;
-	/*width: 100%;*/
-	text-align: left;
-}
-table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+table.tablesorter thead tr th {
 	background-color: #e6EEEE;
-	border: 1px solid #FFF;
-	font-size: 8pt;
-	padding: 4px;
+	/*border: 1px solid #FFF;*/
+	/*font-size: 8pt;*/
+	/*padding: 4px; */
+
 }
-table.tablesorter thead tr .header {
-	background-image: url(bg.gif);
-	background-repeat: no-repeat;
-	background-position: center right;
-	cursor: pointer;
-}
-table.tablesorter tbody td {
-	color: #3D3D3D;
-	padding: 4px;
-	background-color: #FFF;
-	vertical-align: top;
-}
-table.tablesorter tbody tr.odd td {
-	background-color:#F0F0F6;
-}
-table.tablesorter thead tr .headerSortUp {
-	background-image: url(asc.gif);
-}
-table.tablesorter thead tr .headerSortDown {
-	background-image: url(desc.gif);
-}
+
+
 table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
 background-color: #8dbdd8;
 }
-
-
-
 
 /*テーブルを1行おきに背景色を変える*/
 table tr:nth-child(2n) td {
     background: #DDEEFF;
 }
 
-
-/* --- 見出しセル --- */
-thead th {
-background-color: #bde9ba; /* 見出しセルの背景色 */
-text-align: center;
+#sorter .tr-odd {
+	background: #ffffff;
 }
 
-
-
+#sorter .tr-selected {
+	background: #dff3c4;
+}
 
 

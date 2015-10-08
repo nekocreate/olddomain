@@ -5,36 +5,13 @@
     <meta name="robots" content="noimageindex" />
     <meta name="googlebot" content="noimageindex" />
     <meta name="robots" content="nosnippet">
-    <style type="text/css">
-        body { font-size: 50%; }
-        table{
-        /* width: 650px; */ /* 表の幅 */
-        margin-top: 5px;
-        border: 1px #c0c0c0 solid; /* 大枠の境界線 */
-        border-collapse: collapse;
-        font-size: 50%;
-        }
-        
-        /* --- 表タイトル --- */
-        table. caption {
-        padding-bottom: 5px; /* 表タイトルの下パディング */
-        }
-        
-        /* --- セル --- */
-        th,
-        td {
-        /* width: 20%; */ /* セルの幅（セルの幅を均等にする場合） */
-        /* padding: 6px 8px; */ /* セルのパディング（上下、左右） */
-        border: 1px #c0c0c0 solid; /* セルの境界線 */
-        }
-    </style>
 <% end %>
 
 <% content_for(:body) do %>
   <body onLoad="FixedMidashi.create();">
 <% end %>
 
-<h1><%= @domain.name %>の調査結果</h1>
+<h1 class="h3"><%= @domain.name %>の調査結果</h1>
 このドメインのPR：<%= @domain.pr %><br />
 バックリンクの全IP数：<%= @domain.ip_all_count %><br />
 バックリンクのクラスCレベルで重複しないIP数：<%= @domain.ip_unique_count %><br />
@@ -44,7 +21,7 @@
 Waybackmachine登録年：<%= @domain.awy %><br />
 
 
-<table _fixedhead="rows:1; cols:1">
+<table _fixedhead="rows:1; cols:1" class="table-bordered tablesorter">
 <thead>
 <tr>
 <th><div class="tate-area" style="font-size:6pt;"><div class="tate-line">PR</div></div></th>
@@ -237,7 +214,7 @@ Waybackmachine登録年：<%= @domain.awy %><br />
     <td class="blsyurui"><%= bl_syurui %></td>
     <td class="bl" width="200" style="word-break:break-all;"><%= b.bl_title %><br />
         <!-- <a class="blurl" href="http://mublag.boinkor.net/friends?newer=1&since=530770379" target="_blank">http://mublag.boinkor.net/friends?newer=1&since=530770379</a> -->
-        <%= link_to b.bl_url, b.bl_url, class: "blurl", target: "_blank" %></td>
+        <%= link_to b.bl_url, b.bl_url, class: "blurl thumb", target: "_blank" %></td>
     <td class="anchortext" width="200" style="word-break:break-all;">
         <% if oficial_site %>
             <%= oficial_site.html_safe %><%# 公式サイトと判断した場合は、HTML <br />をエスケープしないで表示させる %>
