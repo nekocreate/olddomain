@@ -63,13 +63,10 @@
     <%# このドメインのバックリンクのURLを全て取得して一つにまとめる処理 ここまで ###################################### %>
 
     <%# バックリンクの種類判定の処理 ここから ############################################### %>
+    <% etc = "" %><%# その他 %>
     <% wikipedia = "" %>
     <% china = "" %>
-    <% ac = "" %>
     <% or_ = "" %>
-    <% go = "" %>
-    <% gr = "" %>
-    <% nic = "" %>
     <% facebook = "" %>
     <% twitter = "" %>
     <% gov = "" %>
@@ -83,124 +80,108 @@
     <% myspace = "" %>
     <% plus_google = "" %>
     <% pinterest = "" %>
-    <% nytimes = "" %>
-    <% reuters = "" %>
-    <% washingtonpost = "" %>
-    <% nbc = "" %>
     <% matome_naver = "" %>
     <% okwave = "" %>
 
+    <%# その他のまとめ ####################################################################################################### %>
+    <% if backlink_urls.include?(".gr.") || backlink_urls.include?(".nic.") || backlink_urls.include?(".nytimes.com") ||
+        backlink_urls.include?(".reuters.com") || backlink_urls.include?(".washingtonpost.com") || backlink_urls.include?(".nbc.com") %>
+        <% etc = image_tag(@etc, hspace: 1) %>
+    <% end %>
+
+    <%# 政府機関のまとめ ####################################################################################################### %>
+    <% if backlink_urls.include?(".gov/") || backlink_urls.include?(".gov.") || backlink_urls.include?(".go.") %>
+        <% gov = image_tag(@gov, hspace: 1) %>
+    <% end %>
+
+    <%# 教育機関のまとめ ####################################################################################################### %>
+    <% if backlink_urls.include?(".ac.") || backlink_urls.include?(".edu/") || backlink_urls.include?(".edu.") %>
+        <% edu = image_tag(@edu, hspace: 1) %>
+    <% end %>
+
     <% if backlink_urls.include?(".wikipedia.org") %><%# wikipedia %>
-        <% wikipedia = "[wikipedia]" %>
+        <%# wikipedia = "[wikipedia]" %>
+        <% wikipedia = image_tag(@wikipedia, hspace: 1) %>
     <% end %>
 
     <% if backlink_urls.include?(".cn/") || backlink_urls.include?(".cn.") %><%# 中国 china のみテーブルの別の列で表示させる %>
-        <% china = "[中国]" %>
+        <%# china = "[中国]" %>
+        <% china = image_tag(@china, hspace: 1) %>
     <% end %>
 
-    <% if backlink_urls.include?(".ac.") %>
-        <% ac = "[.ac]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".or.") %>
-        <% or_ = "[.or]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".go.") %>
-        <% go = "[.go]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".gr.") %>
-        <% gr = "[.gr]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".nic.") %>
-        <% nic = "[.nic]" %>
+    <% if backlink_urls.include?(".or.") %><%# 非営利法人 %>
+        <%# or_ = "[.or]" %>
+        <% or_ = image_tag(@corp, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?(".facebook.com") %>
-        <% facebook = "[facebook]" %>
+        <%# facebook = "[facebook]" %>
+        <% facebook = image_tag(@facebook, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?("//twitter.com") || backlink_urls.include?(".twitter.com") %>
-        <% twitter = "[twitter]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".gov/") || backlink_urls.include?(".gov.") %>
-        <% gov = "[.gov]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".edu/") || backlink_urls.include?(".edu.") %>
-        <% edu = "[.edu]" %>
+        <%# twitter = "[twitter]" %>
+        <% twitter = image_tag(@twitter, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?(".museum/") || backlink_urls.include?(".museum.") %>
-        <% museum = "[.museum]" %>
+        <%# museum = "[.museum]" %>
+        <% museum = image_tag(@muse, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?("//musicmoz.org") || backlink_urls.include?(".musicmoz.org") %>
-        <% musicmoz = "[musicmoz]" %>
+        <%# musicmoz = "[musicmoz]" %>
+        <% musicmoz = image_tag(@musicmoz, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?("//dmoz.org") || backlink_urls.include?(".dmoz.org") %>
-        <% dmoz = "[dmoz]" %>
+        <%# dmoz = "[dmoz]" %>
+        <% dmoz = image_tag(@dmoz, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?(".youtube.com") %>
-        <% youtube = "[youtube]" %>
+        <%# youtube = "[youtube]" %>
+        <% youtube = image_tag(@youtube, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?(".linkedin.com") %>
-        <% linkedin = "[linkedin]" %>
+        <%# linkedin = "[linkedin]" %>
+        <% linkedin = image_tag(@linkedin, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?(".tumblr") %>
-        <% tumblr = "[tumblr]" %>
+        <%# tumblr = "[tumblr]" %>
+        <% tumblr = image_tag(@tumblr, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?("//myspace.com") %>
-        <% myspace = "[myspace]" %>
+        <%# myspace = "[myspace]" %>
+        <% myspace = image_tag(@myspace, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?("plus.google.com") %>
-        <% plus_google = "[googleplus]" %>
+        <%# plus_google = "[googleplus]" %>
+        <% plus_google = image_tag(@googleplus, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?(".pinterest.com") %>
-        <% pinterest = "[pinterest]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".nytimes.com") %>
-        <% nytimes = "[nytimes]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".reuters.com") %>
-        <% reuters = "[reuters]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".washingtonpost.com") %>
-        <% washingtonpost = "[washingtonpost]" %>
-    <% end %>
-    
-    <% if backlink_urls.include?(".nbc.com") %>
-        <% nbc = "[nbc]" %>
+        <%# pinterest = "[pinterest]" %>
+        <% pinterest = image_tag(@pinterest, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?(".matome.naver.jp/") %>
-        <% matome_naver = "[naverまとめ]" %>
+        <%# matome_naver = "[naverまとめ]" %>
+        <% matome_naver = image_tag(@naver, hspace: 1) %>
     <% end %>
     
     <% if backlink_urls.include?("okwave.jp/") %>
-        <% okwave = "[okwave]" %>
+        <%# okwave = "[okwave]" %>
+        <% okwave = image_tag(@okwave, hspace: 1) %>
     <% end %>
     
     <%# china のみテーブルの別の列で表示させる %>
-    <% bl_syurui = wikipedia + ac + or_ + go + gr + nic + facebook + twitter + gov + edu + museum + musicmoz + dmoz + youtube + linkedin + tumblr + myspace + plus_google + pinterest + nytimes + reuters + washingtonpost + nbc + matome_naver + okwave %>
+    <% bl_syurui = etc + wikipedia + or_ + facebook + twitter + gov + edu + museum + musicmoz + dmoz + youtube + linkedin + tumblr + myspace + plus_google + pinterest + matome_naver + okwave %>
     <%# バックリンクの種類判定の処理 ここまで ############################################### %>
-
-
-
-
 
     <tr>
       <td nowrap class="domain"><input type="checkbox" id="row_<%= each_count+1 %>" value="1" name="row_<%= each_count+1 %>"><%= d.name %></td><%# name %>
@@ -225,7 +206,7 @@
       <!-- <td>33</td> --><%# ahref dr %>
       <!-- <td>17</td> --><%# ahref bld %>
       <td class="awy"><%= d.awy %></td><%# awy %>
-      <td nowrap><%= bl_syurui %></td>
+      <td nowrap><%= bl_syurui.html_safe %></td>
     </tr>
     
     <% each_count += 1 %>

@@ -11,7 +11,11 @@
   <body onLoad="FixedMidashi.create();">
 <% end %>
 
-<h1 class="h3"><%= @domain.name %>の調査結果</h1>
+<% content_for(:header) do %><%# このページはheaderを表示させない %>
+    <!-- -->
+<% end %>
+
+<h1 class="h4"><%= @domain.name %>の調査結果</h1>
 このドメインのPR：<%= @domain.pr %><br />
 バックリンクの全IP数：<%= @domain.ip_all_count %><br />
 バックリンクのクラスCレベルで重複しないIP数：<%= @domain.ip_unique_count %><br />

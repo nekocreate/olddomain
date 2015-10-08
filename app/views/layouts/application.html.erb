@@ -19,20 +19,35 @@
 <% else %>
   <body>
 <% end %>
+<div id="wrap">
+  <div class="container">
+    <% if content_for?(:header) %>
+      <%= yield :header %>
+    <% else %>
+      <%= render 'layouts/header' %>
+    <% end %>
 
-  <div id="notice">
-    <% flash.each do |message_type, message| %><!-- フラッシュメッセージを表示ここから -->
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %><!-- フラッシュメッセージを表示ここまで -->
+    <div id="notice">
+      <% flash.each do |message_type, message| %><!-- フラッシュメッセージを表示ここから -->
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %><!-- フラッシュメッセージを表示ここまで -->
+    </div>
+
+    <%= yield %>
+
+  </div><!-- container -->
+</div><!-- wrap -->
+
+<div id="footer">
+  <div class="container">
+      <div class="copyright">
+        <p>
+        <br/>Copyright (C) サイトタイトル All Rights Reserved.
+        </p>
+      </div>
   </div>
-
-
-  <%= link_to "top", root_path %><br />
-  <%= link_to "ドメイン一覧(お試し及び本会員用)", domains_path, target: "_blank" %><br />
-  <%= link_to "管理画面", admin_index_path %><br />
-
-<%= yield %>
-
+  
+</div>
 
   <!-- フラッシュメッセージ消す -->
   <script>
@@ -42,5 +57,6 @@
   	}, 1000);
   });
   </script>
+
 </body>
 </html>

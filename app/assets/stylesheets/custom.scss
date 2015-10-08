@@ -1,0 +1,142 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+
+html,
+body {
+  height: 100%;
+  /* html と body 要素はパディングやマージンを持てません。*/
+}
+
+body {
+  max-width: 1000px !important;
+  background-image: url(http://nyamu.sakura.ne.jp/img/olddomain/body_bg.gif);
+  background-repeat: repeat;
+  /*padding-top: 60px;*/
+  margin-right: auto;
+  margin-left: auto;
+  
+}
+
+
+/* フッターを下部へ押しやるための、コンテンツのラッパー */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* フッターの高さ分だけ、ネガティブインデントを指定 */
+  /*margin: 0 auto -60px;*/
+  /* フッターの高さ分だけ、パディングを指定 */
+  /*padding: 0 0 60px;*/
+}
+
+
+
+#wrap .container {
+  background-color: #ffffff;
+  margin-right: auto;
+  margin-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+/*
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+*/
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+#footer .container {
+  background-color: #666 !important;
+  color: #ffffff;
+  /*margin-top: 50px;*/
+  margin-right: auto;
+  margin-left: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+
+@media (min-width: 768px) {
+  /* line 10, /usr/local/rvm/gems/ruby-2.2.1/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 10, /usr/local/rvm/gems/ruby-2.2.1/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* line 10, /usr/local/rvm/gems/ruby-2.2.1/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */
+  .container {
+    width: 900px;
+  }
+}
+
+
+

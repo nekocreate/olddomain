@@ -1,5 +1,6 @@
 class DomainsController < ApplicationController
-
+  before_action :backlink_icon
+  
   # ドメインデータのcsvを登録するフォームを設置
   def new
   end
@@ -36,6 +37,10 @@ class DomainsController < ApplicationController
   def index
     @domains = Domain.all
     @backlinks = Backlink.all
+    
+    # @wikipedia = "http://nyamu.sakura.ne.jp/img/wikipedia.png"
   end
+  
+
   
 end
