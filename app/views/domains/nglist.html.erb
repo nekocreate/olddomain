@@ -1,11 +1,9 @@
-
-
-
-<% @domains_ng = Domain.where.not(ngcheck: "ok") %>
-
-<h1>
-<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-</h1>
+<% content_for(:head) do %>
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="robots" content="noimageindex" />
+    <meta name="googlebot" content="noimageindex" />
+    <meta name="robots" content="nosnippet">
+<% end %>
 
 <!-- panels -->
 <div class="panel panel-danger">
@@ -22,11 +20,11 @@
             なお、NGリスト入りしたドメインは当サービスで提供している期限切れ(中古)ドメインリストには含めておりません。<br />
         </p>
     </div>
-    <table class="table table-bordered table-striped alt-table-responsive">
+    <table class="table table-bordered table-striped table-responsive table-condensed">
         <thead>
             <tr>
-                <th class="warning col-xs-3 col-ms-3 col-md-4 col-lg-4">ドメイン</th>
-                <th class="warning col-xs-3 col-ms-3 col-md-4 col-lg-4">NG判定の理由</th>
+                <th class="warning">ドメイン</th>
+                <th class="warning">NG判定の理由</th>
             </tr>
         </thead>
         <tbody>

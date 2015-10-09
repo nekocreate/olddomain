@@ -98,7 +98,7 @@
         <p>
             世界中で毎日大量に解放される期限切れドメイン(中古ドメイン)の中から、.com .net .org に限定し、弊社のシステムにて調査したものを、できるだけ毎日ご紹介しています。<br />
             これらのドメインは、契約更新されずpending deleteの期限を迎えたばかりのドメインです。<br />
-            (日本時間)：<%= @domains.first.lookup_available_date %>に購入可能チェックを行い、誰にも取得されていなかったドメインです。<br />
+            (日本時間)：<%= @domains_ok.first.lookup_available_date %>に購入可能チェックを行い、誰にも取得されていなかったドメインです。<br />
             AhrefsやOSEなどのサービスはバックリンク調査には大変便利ですが、既にリンクが切れているものも表示されており、そのデータには不正確性があります。<br />
             ですが、ここで提示している情報は、ドメイン一つにつき最大200件のバックリンクサイトを一つ一つ全てチェックし、リンクが切れていない有効なものだけを抽出しているので精度の高いデータとなっております。
         </p>
@@ -150,14 +150,14 @@
     <div class="panel-body">
         <p>
             今回(
-            <% jpdate = @domains.first.lookup_available_date %>
+            <% jpdate = @domains_ok.first.lookup_available_date %>
             <% p = jpdate.index("日") %>
             <%= jpdate[0..p] %>
             )のドメイン精査でこれらのフィルターに引っかかったものは<strong><mark>NGリスト</mark></strong>としています。<br />
             また、参考のために次にご紹介するページで閲覧可能となっています。<br />
             なお、NGリスト入りしたドメインは当サービスで提供している期限切れ(中古)ドメインリストには含めておりません。
         </p>
-        <p><i class="glyphicon glyphicon-hand-right" style="color: blue;"></i> <%= link_to "NGドメインリストはこちら", "#", target: "_blank" %></p>
+        <p><i class="glyphicon glyphicon-hand-right" style="color: blue;"></i> <%= link_to "NGドメインリストはこちら", nglist_domains_path, target: "_blank" %></p>
         <p class="lead">
             まれにフィルターでは省けなかったものが含まれている場合がありますので、ご注意下さい。<br />
         </p>

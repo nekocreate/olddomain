@@ -10,7 +10,7 @@ class DomainsController < ApplicationController
   end
   
   def test
-    @domains = Domain.where(ngcheck: "ok")
+    @domains_ok = Domain.where(ngcheck: "ok")
   end
   
   
@@ -27,22 +27,22 @@ class DomainsController < ApplicationController
     end
   end
   
-  # ドメインデータの詳細を表示する
+  # 各ドメインのバックリンクデータの詳細を表示する
   def show
     @domain = Domain.find(params[:id])
     @domain_name = @domain.name
-    # @backlinks = Backlink.find_by(domain: @domain.name)
     @backlinks = Backlink.where(domain: @domain.name)
   end
   
+  # 全ドメイン一覧を表示する
   def index
-    @domains = Domain.where(ngcheck: "ok")
-    # @domains = Domain.all
+    @domains_ok = Domain.where(ngcheck: "ok")
     @backlinks = Backlink.all
-    
-    # @wikipedia = "http://nyamu.sakura.ne.jp/img/wikipedia.png"
   end
   
+  def nglist
+    @domains_ng = Domain.where.not(ngcheck: "ok")
+  end
 
   
 end

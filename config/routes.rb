@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     end
     
     collection do
-      post "import"
+      post 'import'
+      get 'nglist'
       get 'test'
     end
   end

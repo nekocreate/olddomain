@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   def index
 
     # @domains = Domain.all
-    @domains = Domain.where(ngcheck: "ok")
+    @domains_ok = Domain.where(ngcheck: "ok")
     @backlinks = Backlink.all
   end
 end

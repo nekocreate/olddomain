@@ -48,7 +48,7 @@
   </thead>
   <tbody>
   <% each_count = 0 %>
-  <% @domains.each do |d| %>
+  <% @domains_ok.each do |d| %>
   
     <%# このドメインのバックリンクのURLを全て取得して一つにまとめる処理 ここから ###################################### %>
     <% backlinks = @backlinks.where(domain: d.name) %><%# このドメインnameを持つ全てのバックリンクオブジェクトを格納 %>
