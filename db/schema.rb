@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006200754) do
+ActiveRecord::Schema.define(version: 20151009043439) do
 
   create_table "backlinks", force: :cascade do |t|
     t.string   "domain"
@@ -43,8 +43,11 @@ ActiveRecord::Schema.define(version: 20151006200754) do
     t.string   "moz_rank"
     t.string   "moz_da"
     t.string   "moz_pa"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "ngcheck"
+    t.string   "lookup_available_date"
+    t.string   "gmt"
   end
 
   add_index "domains", ["name"], name: "index_domains_on_name", unique: true
