@@ -1,0 +1,161 @@
+<!-- panels -->
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			アイコンの説明
+		</h3>
+	</div>
+    <ul class="list-group semai">
+    	<li class="list-group-item"><%= image_tag(@china) %>：バックリンクサイトに「.cn」(中国)が含まれていれば表示。</li>
+    	<li class="list-group-item"><%= image_tag(@chuui) %>：アンカーテキストから判断して、注意した方がいい場合に表示。こちらもご覧下さい。</li>
+    	<li class="list-group-item"><%= image_tag(@gov) %>：バックリンクサイトに「.gov .go」(政府機関)が含まれていれば表示。</li>
+    	<li class="list-group-item"><%= image_tag(@edu) %>：バックリンクサイトに「.edu .ed .ac」(教育機関)が含まれていれば表示。</li>
+    	<li class="list-group-item"><%= image_tag(@muse) %>：バックリンクサイトに「.museum」(博物館)が含まれていれば表示。</li>
+    	<li class="list-group-item"><%= image_tag(@wikipedia) %>：バックリンクサイトに「wikipedia」があれば表示。</li>
+    	<li class="list-group-item"><%= image_tag(@etc) %>：バックリンクサイトにその他賢威(オーソリティ)のあるものが含まれていれば表示。</li>
+    	<li class="list-group-item"><%= image_tag(@official) %>：アンカーテキストから判断して、期限切れドメインの元運営サイトが「公式サイト」なら表示。</li>
+    	<!-- <li class="list-group-item"><%= image_tag(@alexa) %>：Alexaトラフィックランクがついているものは表示。</li> -->
+    	<li class="list-group-item"><%= image_tag(@musicmoz) %>：MusicMoz - Open Music Projectに登録されていれば表示。</li>
+    	<li class="list-group-item"><%= image_tag(@dmoz) %>：DMOZ - the Open Directory Projectに登録されていれば表示。</li>
+    	<li class="list-group-item"><%= image_tag(@youtube) %>：YouTubeからの被リンクが確認できるものは表示。</li>
+    	<li class="list-group-item"><%= image_tag(@facebook) %>：Facebookからの被リンクが確認できるものは表示。</li>
+    	<li class="list-group-item"><%= image_tag(@twitter) %>：Twitterからの被リンクが確認できるものは表示。</li>
+        <li class="list-group-item"><%= image_tag(@linkedin) %>：Linkedinからの被リンクが確認できるものは表示。</li>
+        <li class="list-group-item"><%= image_tag(@naver) %>：Naverまとめからの被リンクが確認できるものは表示。</li>
+        <li class="list-group-item"><%= image_tag(@okwave) %>：Okwaveからの被リンクが確認できるものは表示。</li>
+        <li class="list-group-item"><%= image_tag(@hatena) %>：はてなブックマークで登録が確認できるものは表示。</li>
+        <!-- <li class="list-group-item"><%= image_tag(@reddit) %>：redditで登録が確認できるものは表示。</li> -->
+    </ul>
+    <div class="panel-body">
+        <p>・・・他追加予定。<br />
+        <%= image_tag(@facebook, hspace: 1) %><%= image_tag(@twitter, hspace: 1) %><%= image_tag(@linkedin, hspace: 1) %>
+        などは、APIを使ってシェアされているカウント数を調べることができますが、
+        検索エンジンに認識されていなければ意味がありません。
+        そこで、当サービスでは実際に検索エンジンで被リンクとして確認できるものだけに絞ってあります。
+        </p>
+    </div>
+</div>
+
+<!-- panels -->
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			テーブル見出しなどの補足説明
+		</h3>
+	</div>
+    <ul class="list-group semai">
+    	<li class="list-group-item"><strong><mark>SEOチェキ</mark></strong>：「ﾁｪｷ」をクリックすると「wwwありで検索したSEOチェキの結果」を表示します。wwwあり/なし では内容に違いがある場合があります。</li>
+    	<li class="list-group-item"><strong><mark>全IP数</mark></strong>：単純に重複しないIPアドレスの合計数</li>
+    	<li class="list-group-item"><strong><mark>重複しないIP数</mark></strong>：クラスCレベルで、重複しないIPアドレスの合計数</li>
+    	<li class="list-group-item"><strong><mark>IP分散率</mark></strong>：(重複しないIP数÷全IP数)×100%</li>
+    	<li class="list-group-item"><strong><mark>MOZ・Rank</mark></strong>：Open Site Explorer(MOZ)独自のドメインにつけたランク(0～10)</li>
+    	<li class="list-group-item"><strong><mark>MOZ・DA</mark></strong>：Open Site Explorer(MOZ)独自のドメインにつけたDomain Authorityの評価(0～100)</li>
+    	<li class="list-group-item"><strong><mark>MOZ・PA</mark></strong>：Open Site Explorer(MOZ)独自のドメインにつけたPage Authorityの評価(0～100)</li>
+    	<!-- <li class="list-group-item"><strong><mark>Ahr・DR(Ahrefs Domain Rank)</mark></strong>：Ahrefs社独自のドメインにつけたランク(0～100)</li> -->
+    	<!-- <li class="list-group-item"><strong><mark>Ahr・BLD</mark></strong>：Ahrefsのバックリンクドメイン数</li> -->
+    	<li class="list-group-item"><strong><mark>AWY</mark></strong>：Way Back Machine にはじめて記録された年(おおよそ○年モノのドメインという目安になる)</li>
+    	<li class="list-group-item"><strong><mark>要注意</mark></strong>：アンカーテキストにアダルト系のキーワードや、
+    	「プラダ」「ロレックス」…などスパムサイトでよく利用されるキーワードを含んでいる場合に<%= image_tag(@chuui, hspace: 1) %>アイコンを表示。
+    	ただし、だからダメということではなく、nofollow被リンクの場合、このようなドメインでも上位表示されるケースもあります。
+    	ですから自己責任で判断して下さい。</li>
+    </ul>
+    <div class="panel-body">
+        <p class="lead">
+            「MOZ・Rank」「MOZ・DA」「MOZ・PA」<!--「Ahr・DR」「Ahr・BLD」-->「AWY」はAPIで取得しているため、実際とは異なる場合があります。
+    
+        </p>
+    </div>
+</div>
+
+<!-- panels -->
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			見やすさ重視
+		</h3>
+	</div>
+    <div class="panel-body">
+        <p>
+            期限切れ中古ドメインの取得は、世界中のライバルとのドメイン争奪戦です。早い者勝ちです。 
+            そこで、このドメインリストのテーブル表は、「見やすさ」と「わかりやすさ」を重視して作成しています。 
+            テーブル表をできるだけスッキリさせるために、表示させる項目を必要最小限に絞っています。 
+        </p>
+    </div>
+</div>
+
+<!-- panels -->
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			ご紹介しているドメインについて
+		</h3>
+	</div>
+    <div class="panel-body">
+        <p>
+            世界中で毎日大量に解放される期限切れドメイン(中古ドメイン)の中から、.com .net .org に限定し、弊社のシステムにて調査したものを、できるだけ毎日ご紹介しています。<br />
+            これらのドメインは、契約更新されずpending deleteの期限を迎えたばかりのドメインです。<br />
+            2015年06月26日20時49分に購入可能チェックを行い、誰にも取得されていなかったドメインです。<br />
+            AhrefsやOSEなどのサービスはバックリンク調査には大変便利ですが、既にリンクが切れているものも表示されており、そのデータには不正確性があります。<br />
+            ですが、ここで提示している情報は、ドメイン一つにつき最大200件のバックリンクサイトを一つ一つ全てチェックし、リンクが切れていない有効なものだけを抽出しているので精度の高いデータとなっております。
+        </p>
+        <p class="lead">
+            通信回線の影響やバックリンクサイト側の問題が原因で、接続が時間がかかったものは被リンクの有無を調査していません。<br />
+            <mark>ドメインの取得は早い者勝ちですので、既に誰かが取得している場合があります。ご了承ください。</mark>
+        </p>
+    </div>
+</div>
+
+<!-- panels -->
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			よくある中古ドメイン収集(発見)ツールとの違い
+		</h3>
+	</div>
+    <div class="panel-body">
+        <p>
+            一般に出回っている中古ドメインを見つけるツールは、ネット上を徘徊しwebサイトやリンク集や掲示板などから期限切れになっているドメインを見つけてくる仕様のものがほとんどです。<br />
+            そのようなドメインは、当サービスで開発及び使用しているシステム及び中古ドメイン業者など、毎日ドメインを精査している業者が<strong><mark>一度は見捨てたドメイン(落ちこぼれドメイン)</mark></strong>である可能性もあります。<br /> 
+            また、そういったドメインは期限が切れてからずいぶん時間が経過してしまったものも多いです。<br />
+            検索エンジンは過去の被リンクをリセットする(引き継がない)とも言われていますから、 中古ドメインは期限が切れたらできるだけ早く取得したほうが良いのは言うまでもありません。<br />
+            当サービスでは、<strong><mark>期限日を迎えたばかりの最新の中古ドメイン</mark></strong>をできるだけ毎日ご紹介しています。
+        </p>
+    </div>
+</div>
+
+<!-- panels -->
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			できる限り怪しいドメインを排除しています。
+		</h3>
+	</div>
+    <div class="panel-body">
+        <p>
+            以下のものは独自のフィルター処理によりできるかぎり省いております。
+        </p>
+    </div>
+    <ul class="list-group semai">
+    	<li class="list-group-item"><i class="glyphicon glyphicon-remove-circle" style="color: red;"></i> リダイレクト用ドメイン</li>
+    	<li class="list-group-item"><i class="glyphicon glyphicon-remove-circle" style="color: red;"></i> ページランク偽装ドメイン</li>
+    	<li class="list-group-item"><i class="glyphicon glyphicon-remove-circle" style="color: red;"></i> ブラックリスト登録ドメイン</li>
+    	<li class="list-group-item"><i class="glyphicon glyphicon-remove-circle" style="color: red;"></i> セーフブラウジングで怪しいと判断したドメイン</li>
+    </ul>
+    <div class="panel-body">
+        <p>
+            今回(06/25)のドメイン精査でこれらのフィルターに引っかかったものは<strong><mark>NGリスト</mark></strong>としています。<br />
+            また、参考のために次にご紹介するページで閲覧可能となっています。<br />
+            なお、NGリスト入りしたドメインは当サービスで提供している期限切れ(中古)ドメインリストには含めておりません。
+        </p>
+        <p><i class="glyphicon glyphicon-hand-right" style="color: blue;"></i> <%= link_to "NGドメインリストはこちら", "#", target: "_blank" %></p>
+        <p class="lead">
+            まれにフィルターでは省けなかったものが含まれている場合がありますので、ご注意下さい。<br />
+        </p>
+    </div>
+</div>

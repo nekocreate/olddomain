@@ -5,10 +5,6 @@
     <meta name="robots" content="noimageindex" />
     <meta name="googlebot" content="noimageindex" />
     <meta name="robots" content="nosnippet">
-    <!--<style>
-    div.code {background-color: #c0c0c0; width: 400px;}
-    div.wrap {width: 600px;}
-    </style>-->
     <script>
     $(function() {
       $('#sorter').tablesorter();
@@ -23,7 +19,9 @@
   <body onLoad="FixedMidashi.create();">
 <% end %>
 
-<h1 class="h3">ドメイン一覧 Domains#index</h1>
+<%= render 'shared/head_info' %>
+
+<div class="domain_table">
 <div class="scroll_div">
 <table _fixedhead="rows:1; cols:1" id="sorter" class="table-bordered tablesorter">
   <thead>
@@ -214,50 +212,52 @@
   </tbody>
 </table>
 </div>
+</div>
 
+<%= render 'shared/main_details' %>
 
-
-
-<script>
-$(function() {
-  // th row
-  $('[id^="row_"]').click(function(event){
-    event.stopPropagation();
+<% content_for(:footer_js) do %>
+  <script>
+  $(function() {
+    // th row
+    $('[id^="row_"]').click(function(event){
+      event.stopPropagation();
+      $auto_line_color();
+    });
+    $('[id^="row_"]').parent('th').click(function(event){
+      $(this).children('[id^="row_"]').trigger('click');
+    });
+    $('label[for^="row_"]').click(function(event) {
+      event.preventDefault();
+    });
+  
+    var $auto_line_color = function() {
+      // checked row list
+      var $row_list = $('[id^="row_"]:checked');
+      var $ary_row_index = [];
+      $row_list.each(function() {
+        $ary_row_index.push(parseInt($(this).attr('id').slice(4)));
+      });
+  
+      $('table tbody th').css('background', '');
+      $('table tbody td').css('background', '');
+  
+      for($j in $ary_row_index) {
+        $('table tbody tr:nth-child('+$ary_row_index[$j]+') th').css('background', '#EFEBC2');
+        $('table tbody tr:nth-child('+$ary_row_index[$j]+') td').css('background', '#EFEBC2');
+      }// end for
+    }// end function
     $auto_line_color();
   });
-  $('[id^="row_"]').parent('th').click(function(event){
-    $(this).children('[id^="row_"]').trigger('click');
+  </script>
+  
+  <script type="text/javascript">
+  //popupで別窓
+  $(function() {
+  	$(".popup").click(function(){
+          	window.open(this.href, "waku1","width=500,height=700,resizable=yes,scrollbars=yes,createnew=no");
+  		return false;
+  	});
   });
-  $('label[for^="row_"]').click(function(event) {
-    event.preventDefault();
-  });
-
-  var $auto_line_color = function() {
-    // checked row list
-    var $row_list = $('[id^="row_"]:checked');
-    var $ary_row_index = [];
-    $row_list.each(function() {
-      $ary_row_index.push(parseInt($(this).attr('id').slice(4)));
-    });
-
-    $('table tbody th').css('background', '');
-    $('table tbody td').css('background', '');
-
-    for($j in $ary_row_index) {
-      $('table tbody tr:nth-child('+$ary_row_index[$j]+') th').css('background', '#EFEBC2');
-      $('table tbody tr:nth-child('+$ary_row_index[$j]+') td').css('background', '#EFEBC2');
-    }// end for
-  }// end function
-  $auto_line_color();
-});
-</script>
-
-<script type="text/javascript">
-//popupで別窓
-$(function() {
-	$(".popup").click(function(){
-        	window.open(this.href, "waku1","width=500,height=700,resizable=yes,scrollbars=yes,createnew=no");
-		return false;
-	});
-});
-</script>
+  </script>
+<% end %>

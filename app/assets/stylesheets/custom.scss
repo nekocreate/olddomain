@@ -107,6 +107,11 @@ p {
 }
 
 
+.domain_table {
+  margin-bottom: 100px;
+}
+
+
 #footer .container {
   background-color: #666 !important;
   color: #ffffff;
@@ -116,6 +121,16 @@ p {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
 }
+
+
+//panelのlist-group-item を狭くする
+ul.semai li {
+  /*font-size: 10px;*/
+  line-height: 1 !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
 
 
 @media (min-width: 768px) {

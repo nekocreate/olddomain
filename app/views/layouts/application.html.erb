@@ -7,6 +7,7 @@
 
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <%= csrf_meta_tags %>
   <% if content_for?(:head) %>
@@ -19,35 +20,38 @@
 <% else %>
   <body>
 <% end %>
-<div id="wrap">
-  <div class="container">
-    <% if content_for?(:header) %>
-      <%= yield :header %>
-    <% else %>
-      <%= render 'layouts/header' %>
-    <% end %>
-
-    <div id="notice">
-      <% flash.each do |message_type, message| %><!-- フラッシュメッセージを表示ここから -->
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %><!-- フラッシュメッセージを表示ここまで -->
-    </div>
-
-    <%= yield %>
-
-  </div><!-- container -->
-</div><!-- wrap -->
-
-<div id="footer">
-  <div class="container">
-      <div class="copyright">
-        <p>
-        <br/>Copyright (C) サイトタイトル All Rights Reserved.
-        </p>
-      </div>
-  </div>
+  <div id="wrap">
+    <div class="container">
+      <% if content_for?(:header) %>
+        <%= yield :header %>
+      <% else %>
+        <%= render 'layouts/header' %>
+      <% end %>
   
-</div>
+      <div id="notice">
+        <% flash.each do |message_type, message| %><!-- フラッシュメッセージを表示ここから -->
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %><!-- フラッシュメッセージを表示ここまで -->
+      </div>
+  
+      <article>
+          <section>
+              <%= yield %>
+          </section>
+      </article>
+    
+    </div><!-- container -->
+  </div><!-- wrap -->
+
+  <footer id="footer">
+    <div class="container">
+        <div class="copyright">
+          <p>
+          <br/>Copyright (C) サイトタイトル All Rights Reserved.
+          </p>
+        </div>
+    </div>
+  </footer>
 
   <!-- フラッシュメッセージ消す -->
   <script>
@@ -57,6 +61,10 @@
   	}, 1000);
   });
   </script>
+  
+  <% if content_for?(:footer_js) %>
+    <%= yield :footer_js %>
+  <% end %>
 
 </body>
 </html>

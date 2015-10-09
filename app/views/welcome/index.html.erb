@@ -2,10 +2,6 @@
     <%= javascript_include_tag 'fixed_midashi.js' %>
     <%= javascript_include_tag 'jquery.tablesorter.min.js' %>
     <meta name="robots" content="index,nofollow,archive" />
-    <!--<style>
-    div.code {background-color: #c0c0c0; width: 400px;}
-    div.wrap {width: 600px;}
-    </style>-->
     <script>
     $(function() {
       $('#sorter').tablesorter();
@@ -20,7 +16,9 @@
   <body onLoad="FixedMidashi.create();">
 <% end %>
 
-<h1 class="h2">ドメイン一覧 Wellcome#index</h1>
+<%= render 'shared/head_info' %>
+
+<div class="domain_table">
 <div class="scroll_div">
 <table _fixedhead="rows:1; cols:1" id="sorter" class="table-bordered tablesorter">
   <thead>
@@ -222,8 +220,6 @@
   </tbody>
 </table>
 </div>
+</div>
 
-
-
-
-
+<%= render 'shared/main_details' %>
