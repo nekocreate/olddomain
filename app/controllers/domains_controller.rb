@@ -10,6 +10,7 @@ class DomainsController < ApplicationController
   end
   
   def test
+    @domains = Domain.where(ngcheck: "ok")
   end
   
   
@@ -35,7 +36,8 @@ class DomainsController < ApplicationController
   end
   
   def index
-    @domains = Domain.all
+    @domains = Domain.where(ngcheck: "ok")
+    # @domains = Domain.all
     @backlinks = Backlink.all
     
     # @wikipedia = "http://nyamu.sakura.ne.jp/img/wikipedia.png"

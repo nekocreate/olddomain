@@ -54,7 +54,11 @@
     <% backlinks = @backlinks.where(domain: d.name) %><%# このドメインnameを持つ全てのバックリンクオブジェクトを格納 %>
     <% backlink_urls = "" %><%# 変数を空として初期化 %>
     <% backlinks.each do |b| %>
-      <% backlink_urls = backlink_urls + b.bl_url %><%# 文字列として繋げていき、最終的には一つにまとめる %>
+      <% if b.bl_url.present? %>
+        <% backlink_urls = backlink_urls + b.bl_url %><%# 文字列として繋げていき、最終的には一つにまとめる %>
+      <% else %>
+        <% backlink_urls = backlink_urls + "" %><%# 文字列として繋げていき、最終的には一つにまとめる %>
+      <% end %>
     <% end %>
     <%# このドメインのバックリンクのURLを全て取得して一つにまとめる処理 ここまで ###################################### %>
 

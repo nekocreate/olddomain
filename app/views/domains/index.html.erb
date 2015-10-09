@@ -57,7 +57,11 @@
     <% backlinks = @backlinks.where(domain: d.name) %><%# このドメインnameを持つ全てのバックリンクオブジェクトを格納 %>
     <% backlink_urls = "" %><%# 変数を空として初期化 %>
     <% backlinks.each do |b| %>
-      <% backlink_urls = backlink_urls + b.bl_url %><%# 文字列として繋げていき、最終的には一つにまとめる %>
+      <% if b.bl_url.present? %>
+        <% backlink_urls = backlink_urls + b.bl_url %><%# 文字列として繋げていき、最終的には一つにまとめる %>
+      <% else %>
+        <% backlink_urls = backlink_urls + "" %><%# 文字列として繋げていき、最終的には一つにまとめる %>
+      <% end %>
     <% end %>
     <%# このドメインのバックリンクのURLを全て取得して一つにまとめる処理 ここまで ###################################### %>
 
@@ -194,7 +198,7 @@
       <td class="index_count"><%= d.index_count %></td><%# index_count %>
       <td class="dofollow_pr"><%= d.dofollow_pr %></td><%# dofollow_pr %>
       <td class="nofollow_pr"><%= d.nofollow_pr %></td><%# nofollow_pr %>
-      <td class="ip_bunsanritsu"><%= d.ip_bunsanritsu %>%</td><%# IP分散率 ip_bunsanritsu %>
+      <td class="ip_bunsanritsu"><%= d.ip_bunsanritsu %></td><%# IP分散率 ip_bunsanritsu %>
       <td class="ip_unique_count"><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
       <td class="ip_all_count"><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
       <td class="china"><%= china %></td><%# china 中国リンク %>

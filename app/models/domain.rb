@@ -20,6 +20,6 @@ class Domain < ActiveRecord::Base
     def self.updatable_attributes
         ["name", "pr", "wayback", "seocheki", "index_count", "dofollow_pr", "nofollow_pr",
         "awy", "china", "ip_bunsanritsu", "ip_unique_count", "ip_all_count", "moz_rank",
-        "moz_da moz_pa"]
+        "moz_da moz_pa", "ngcheck", "lookup_available_date", "gmt"]
     end
 end

@@ -52,18 +52,26 @@ Waybackmachine登録年：<%= @domain.awy %><br />
     <%# ダブルクォートやカンマなどの置換 ################################## %>
     <% if b.bl_title.present? %>
         <% b.bl_title = b.bl_title.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% else %>
+        <% b.bl_title = "" %>
     <% end %>
     
     <% if b.bl_url.present? %>
         <% b.bl_url = b.bl_url.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% else %>
+        <% b.bl_url = "" %>
     <% end %>
 
     <% if b.anchor_text.present? %>
         <% b.anchor_text = b.anchor_text.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% else %>
+        <% b.anchor_text = "" %>
     <% end %>
 
     <% if b.href_url.present? %>
         <% b.href_url = b.href_url.gsub("|comma|",",").gsub("|doublequote|",'"') %>
+    <% else %>
+        <% b.href_url = "" %>
     <% end %>
     
     <%# バックリンクの種類判定の処理 ここから ############################################### %>
