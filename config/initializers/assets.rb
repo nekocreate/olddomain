@@ -13,3 +13,5 @@ Rails.application.config.assets.precompile += %w( fixed_midashi.js )
 Rails.application.config.assets.precompile += %w( jquery.tablesorter.min.js )
 Rails.application.config.assets.precompile += %w( jquery-2.0.3.min.js )
 Rails.application.config.assets.precompile += %w( thumbnail.js )
+
+Rails.application.config.assets.precompile += %w( domains.scss )
