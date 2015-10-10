@@ -137,22 +137,32 @@ ul.semai li {
 @media (min-width: 768px) {
   /* line 10, /usr/local/rvm/gems/ruby-2.2.1/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */
   .container {
-    width: 750px;
+    /*width: 750px;*/
+    width: 100%;
+  }
+  .navbar {
+    width: 100%;
+  }
+  .panel {
+    width: 100%;
   }
 }
+
+/*
 @media (min-width: 992px) {
-  /* line 10, /usr/local/rvm/gems/ruby-2.2.1/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */
+
   .container {
-    width: 970px;
+    width: 100%;
   }
 }
 
 @media (min-width: 1200px) {
-  /* line 10, /usr/local/rvm/gems/ruby-2.2.1/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */
+
   .container {
     width: 900px;
   }
-}
 
+}
+*/
 
 
