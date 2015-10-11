@@ -31,6 +31,10 @@ gem 'bootstrap-sass'
 # 2015年10月11日追加 パスワードなどをGitHubにpushしないようにするためのgem
 gem 'config'
 
+# 2015年10月11日追加　devise と omniauth-twitter
+gem 'devise'
+gem 'omniauth-twitter'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
