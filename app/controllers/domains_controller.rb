@@ -1,8 +1,10 @@
 class DomainsController < ApplicationController
+  before_action :domain_backlink_data_check
   before_action :backlink_icon
   
   # deviseによるアクセス制限 ログインしていなければ show index ページへのアクセス不可
-  before_action :authenticate_user!, only:[:show, :index]
+    before_action :authenticate_user!, only:[:show, :index]
+
   
   # ドメインデータのcsvを登録するフォームを設置
   def new
@@ -46,6 +48,5 @@ class DomainsController < ApplicationController
   def nglist
     @domains_ng = Domain.where.not(ngcheck: "ok")
   end
-
   
 end

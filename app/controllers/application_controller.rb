@@ -40,4 +40,11 @@ class ApplicationController < ActionController::Base
     @youtube = "http://nyamu.sakura.ne.jp/img/youtube.png"
   end
 
+  # Domain Backlink テーブルにデータがなければリダイレクト
+  def domain_backlink_data_check
+    if !Domain.exists? || !Backlink.exists?
+      redirect_to welcome_no_data_path
+    end
+  end
+
 end

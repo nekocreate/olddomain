@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'welcome/import'
+  get 'welcome/no_data'
   
   resources :domains do
     member do

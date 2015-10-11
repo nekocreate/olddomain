@@ -11,3 +11,15 @@
   <%= submit_tag "インポート" %>
 <% end %>
 <hr>
+
+<% if current_admin_user %>
+  adminユーザーです。
+<% else %>
+  adminユーザーではありません。
+<% end %>
+
+<% if !Domain.exists? || !Backlink.exists? %>
+  ないよ
+<% else %>
+  あるよ
+<% end %>
