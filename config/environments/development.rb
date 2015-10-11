@@ -44,4 +44,16 @@ Rails.application.configure do
   # cloud9 がローカルホストなので以下のようにした
   config.action_mailer.default_url_options = { host: 'techacademy-nekocreate.c9.io', port: $PORT }
 
+  # 2015年10月11日追加 mail setting
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :user_name => Settings.gmail[:user_name],
+    :password => Settings.gmail[:password],
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
 end

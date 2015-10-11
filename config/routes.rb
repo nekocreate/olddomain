@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  # get 'domains/show'
+  devise_for :users
+
 
   root 'welcome#index'
   get 'welcome/import'
   
-  # resources :domains
 
   resources :domains do
     member do
