@@ -36,6 +36,9 @@ gem 'devise'
 # omniauth-twitter は使用しない
 # gem 'omniauth-twitter'
 
+# 2015年10月12日追加
+gem 'rails_admin'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
+  
+  # devise_for :admin_users の行が、mount RailsAdmin::Engine の行より上に来るようにします。
   devise_for :admin_users
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  # devise_for :admin_users の行が、mount RailsAdmin::Engine の行より上に来るようにします。
+  
   devise_for :users
 
-
-  root 'welcome#index'
   get 'welcome/import'
   
-
   resources :domains do
     member do
       # get 'test' # テスト用
