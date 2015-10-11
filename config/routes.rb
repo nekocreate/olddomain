@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'welcome/import'
   get 'welcome/no_data'
+  get 'welcome/test'
   
   resources :domains do
     member do

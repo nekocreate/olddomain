@@ -1,5 +1,5 @@
 class DomainsController < ApplicationController
-  before_action :domain_backlink_data_check
+  # domain_backlink_data_checkbefore_action :domain_backlink_data_check
   before_action :backlink_icon
   
   # deviseによるアクセス制限 ログインしていなければ show index ページへのアクセス不可
@@ -34,6 +34,7 @@ class DomainsController < ApplicationController
   
   # 各ドメインのバックリンクデータの詳細を表示する
   def show
+    domain_backlink_data_check
     @domain = Domain.find(params[:id])
     @domain_name = @domain.name
     @backlinks = Backlink.where(domain: @domain.name)
@@ -41,12 +42,21 @@ class DomainsController < ApplicationController
   
   # 全ドメイン一覧を表示する
   def index
+    domain_backlink_data_check
     @domains_ok = Domain.where(ngcheck: "ok")
     @backlinks = Backlink.all
   end
   
   def nglist
+    domain_backlink_data_check
     @domains_ng = Domain.where.not(ngcheck: "ok")
+  end
+
+  # Domain Backlink テーブルにデータがなければリダイレクト
+  def domain_backlink_data_check
+    if !Domain.exists? || !Backlink.exists?
+      redirect_to welcome_no_data_path
+    end
   end
   
 end

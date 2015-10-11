@@ -1,0 +1,18 @@
+
+
+
+<% if user_signed_in? %>
+    <% if current_user.admin? %>
+        admin です。
+    <% else %>
+        admin ではないです。
+    <% end %>
+<% end %>
+
+
+<hr>
+<% if current_admin_user %>
+  adminユーザーです。
+<% else %>
+  adminユーザーではありません。
+<% end %>
