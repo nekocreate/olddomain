@@ -28,6 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # 2015年10月9日追加
 gem 'bootstrap-sass'
 
+# 2015年10月11日追加 パスワードなどをGitHubにpushしないようにするためのgem
+gem 'config'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
