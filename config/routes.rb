@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   # devise_for :admin_users の行が、mount RailsAdmin::Engine の行より上に来るようにします。
   
   # devise_for :users # 元々の
-  
   # 2015年10月12日編集 deviseのコントローラーをカスタマイズ
   devise_for :users, :controllers => {
   :sessions      => "users/sessions",

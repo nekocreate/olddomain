@@ -16,3 +16,14 @@
 <% else %>
   adminユーザーではありません。
 <% end %>
+
+
+<% @users = User.all %>
+<%= @users.inspect %>
+
+<hr>
+
+
+
+@user = User.find(params[:id])
+    @user.update_attributes = { :pmember = 'true'}

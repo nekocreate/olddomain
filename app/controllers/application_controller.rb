@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
+
  # iconのURLの定義
   def backlink_icon
     @alexa = "http://nyamu.sakura.ne.jp/img/alexa.png"
@@ -39,5 +40,18 @@ class ApplicationController < ActionController::Base
     @wikipedia = "http://nyamu.sakura.ne.jp/img/wikipedia.png"
     @youtube = "http://nyamu.sakura.ne.jp/img/youtube.png"
   end
+
+  # devise に追加したカラムを適用させるメソッド
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+ 
+  protected
+ 
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up) << :admin
+      devise_parameter_sanitizer.for(:account_update) << :admin
+
+      devise_parameter_sanitizer.for(:sign_up) << :handlename
+      devise_parameter_sanitizer.for(:account_update) << :handlename
+    end
 
 end
