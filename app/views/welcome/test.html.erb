@@ -1,5 +1,7 @@
 
 
+<%= Rails.application.secrets.gmail_user_name %>
+
 <% if user_signed_in? %>
     <% if current_user.admin? %>
         admin です。
