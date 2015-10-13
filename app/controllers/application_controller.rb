@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
     @youtube = "http://nyamu.sakura.ne.jp/img/youtube.png"
   end
 
-  # devise に追加したカラムを適用させるメソッド
+  # devise に追加したカラムを適用させるbefore_filterメソッド
   before_filter :configure_permitted_parameters, if: :devise_controller?
  
   protected
@@ -52,6 +52,9 @@ class ApplicationController < ActionController::Base
 
       devise_parameter_sanitizer.for(:sign_up) << :handlename
       devise_parameter_sanitizer.for(:account_update) << :handlename
+      
+      devise_parameter_sanitizer.for(:sign_up) << :promember
+      devise_parameter_sanitizer.for(:account_update) << :promember
     end
 
 end
