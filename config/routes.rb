@@ -14,9 +14,10 @@ Rails.application.routes.draw do
   :passwords     => "users/passwords"
   }
 
-  get 'welcome/import'
-  get 'welcome/no_data'
-  get 'welcome/test'
+  get 'welcome/import' # ドメインインポート用
+  get 'welcome/no_data' # ドメイン・バックリンクデータが存在しない場合の仮のペラページ
+  get 'welcome/test' # テスト用
+
   
   resources :domains do
     member do
@@ -41,6 +42,7 @@ Rails.application.routes.draw do
   end
 
  
+  resources :users, only: [:index, :update, :destroy]
   
   # createはテープルに登録する newは登録画面 indexはドメインのテーブル表1ページで表示する
   # showアクションを使わないのは、showアクションはrouteで生成されるurlのパターンに「:id」を含んでしまうため。

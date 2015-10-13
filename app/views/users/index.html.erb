@@ -1,0 +1,49 @@
+<style>
+.container {min-width: 100% !important;}
+</style>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>handlename</th>
+        <th>email</th>
+        <th>admin</th>
+        <th>promember</th>
+        <th>update</th>
+        <th>削除</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <% @users.each do |t| %>
+        <% @user = @users.find(t.id) %>
+        <%= form_for (@user) do |f| %>
+            <%= f.hidden_field :id, :value => @user.id %>
+            
+            <tr>
+            <td><%= t.id %></td>
+            <td><%= f.text_field :handlename %></td>
+            <td><%= f.text_field :email  %></td>
+            <td>admin:<%= f.text_field :admin %></td>
+            <td>ProMember:<%#= f.text_field :promember %></td>
+            <td><%= f.submit "update" %></td>
+            <% if @user.admin? %><%# admin 以外のみdeleteリンクを表示 %>
+                <td>****</td>
+            <% else %>
+                <td><%= link_to "削除", @user, class: "btnlink btnlink-danger glyphicon glyphicon-trash", method: :delete, data: {confirm: "本当に削除してもいいですか？"} %></td>
+            <% end %>
+            </tr>
+        <% end %>
+    
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+
+<% if false %>
+    id:<%= t.id %><br />
+    email:<%= t.email %><br />
+    handlename:<%= t.handlename %><br />
+<% end %>
