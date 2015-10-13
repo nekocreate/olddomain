@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+    
+    # 公式サイト ではエラーが出た。
     #def twitter
     #    # You need to implement the method below in your model (e.g. app/models/user.rb)
     #    @user = User.from_omniauth(request.env["omniauth.auth"])
@@ -12,6 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     #    end
     #end
 
+    # 以下に変更するとエラーが出なくなった
     def twitter
         @user = User.from_omniauth(request.env["omniauth.auth"])
 
