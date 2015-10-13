@@ -1,6 +1,6 @@
 class DomainsController < ApplicationController
   # domain_backlink_data_checkbefore_action :domain_backlink_data_check
-  before_action :backlink_icon
+  before_action :images_icons
   
   # deviseによるアクセス制限 ログインしていなければ show index ページへのアクセス不可
   before_action :authenticate_user!, only:[:show, :index]

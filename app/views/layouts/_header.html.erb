@@ -24,6 +24,7 @@
 						  <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
 						  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
 						<% else %>
+						  <li class="snsbtn"><%= link_to (image_tag @signintwitter), user_omniauth_authorize_path(:twitter) %></li>
 						  <li><%= link_to "サインイン", new_user_registration_path %></li>
 						  <li><%= link_to "ログイン", new_user_session_path %></li>
 						<% end %>
@@ -39,6 +40,7 @@
 		</div>
 	</nav>
 </header>
+
 
 <% if user_signed_in? %> 
 	<p><strong>

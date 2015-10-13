@@ -16,6 +16,9 @@ Devise.setup do |config|
   # config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   # 2015年10月11日追加  gmailでメールが送信されるようにした mail setting
   config.mailer_sender = Settings.gmail[:user_name]
+  
+  # 2015年10月13日追加
+  config.omniauth :twitter, Settings.twitterneko[:apikey], Settings.twitterneko[:apisecret]
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

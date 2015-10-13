@@ -6,6 +6,9 @@
 <thead>
   <tr>
     <th>id</th>
+    <th>Provider</th>
+    <th>Uid</th>
+    <th>Username<br />(twitter)</th>
     <th>handlename</th>
     <th>email</th>
     <th>admin</th>
@@ -23,6 +26,9 @@
         
         <tr>
         <td><%= t.id %></td>
+        <td><%= t.provider %></td>
+        <td><%= t.uid %></td>
+        <td><%= t.username %></td>
         <td><%= f.text_field :handlename %></td>
         <td><%= f.text_field :email  %></td>
         <td>admin:<%= f.text_field :admin %></td>

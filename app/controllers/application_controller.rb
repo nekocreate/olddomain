@@ -5,8 +5,9 @@ class ApplicationController < ActionController::Base
 
 
 
- # iconのURLの定義
-  def backlink_icon
+ # iconやその他画像のURLの定義
+  def images_icons
+    # バックリンクのアイコン
     @alexa = "http://nyamu.sakura.ne.jp/img/alexa.png"
     @china = "http://nyamu.sakura.ne.jp/img/china.png"
     @chuui = "http://nyamu.sakura.ne.jp/img/chuui.png"
@@ -39,6 +40,9 @@ class ApplicationController < ActionController::Base
     @twitter = "http://nyamu.sakura.ne.jp/img/twitter.png"
     @wikipedia = "http://nyamu.sakura.ne.jp/img/wikipedia.png"
     @youtube = "http://nyamu.sakura.ne.jp/img/youtube.png"
+    
+    # sign in sns button
+    @signintwitter = "http://nyamu.sakura.ne.jp/img/olddomain/signintwitter.gif"
   end
 
   # devise に追加したカラムを適用させるbefore_filterメソッド

@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   # before_action :domain_backlink_data_check # ここでこれを入れると無限ループになる。
-  before_action :backlink_icon
+  before_action :images_icons
 
   def index
     domain_backlink_data_check

@@ -132,7 +132,11 @@ ul.semai li {
 }
 
 
-
+/* sign in with twitter btn */
+.navbar-nav > li.snsbtn > a {
+    padding-top: 5px;
+    padding-bottom: auto;
+}
 
 @media (min-width: 768px) {
   /* line 10, /usr/local/rvm/gems/ruby-2.2.1/gems/bootstrap-sass-3.3.5.1/assets/stylesheets/bootstrap/_grid.scss */

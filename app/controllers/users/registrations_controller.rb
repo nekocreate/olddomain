@@ -1,5 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-
+  before_action :images_icons
+  
   ### ユーザープロフィールの更新を、パスワード不要にする処理 ###
   # update アクションは、公式サイトのものをそのまま引用して、一部だけ書き換えた。
   # 公式サイト

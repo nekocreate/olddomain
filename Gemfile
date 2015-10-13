@@ -33,8 +33,9 @@ gem 'config'
 
 # 2015年10月11日追加　devise
 gem 'devise'
-# omniauth-twitter は使用しない
-# gem 'omniauth-twitter'
+
+# 2015年10月13日追加
+gem 'omniauth-twitter'
 
 # 2015年10月12日追加
 gem 'rails_admin'
