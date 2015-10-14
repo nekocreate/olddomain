@@ -9,6 +9,9 @@ gem 'sqlite3', group: :development
 # heroku 本番環境ではpostgressを使用する
 gem 'pg', group: :production
 
+# 2015年10月14日追加 herokuの「Precompiling assets failed.」対策として
+gem 'rails_12factor', group: :production
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
