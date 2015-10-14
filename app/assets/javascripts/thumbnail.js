@@ -19,6 +19,6 @@ $.fn.thumbnail = function(baseURL){
 }
 $(function(){
     $("body").append("<img src='' id='jqThumbnail' width='320' height='240' style='position:absolute;display:none'>");
-    /*$("a").thumbnail();*/ //全てのaタグに適応
-    $("a.thumb").thumbnail(); //aタグのclassにthumbと指定したものだけサムネイルを表示
+    /*$("a").thumbnail();*/ /*全てのaタグに適応*/
+    $("a.thumb").thumbnail(); /*aタグのclassにthumbと指定したものだけサムネイルを表示*/
 });
