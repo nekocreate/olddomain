@@ -54,8 +54,8 @@ Rails.application.routes.draw do
     end
   end
  
-  #resources :users, only: [:index, :update, :destroy]
-  resources :users
+  resources :users, only: [:index, :update, :destroy]
+  # resources :users
   
   # createはテープルに登録する newは登録画面 indexはドメインのテーブル表1ページで表示する
   # showアクションを使わないのは、showアクションはrouteで生成されるurlのパターンに「:id」を含んでしまうため。
