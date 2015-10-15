@@ -1,4 +1,5 @@
-<h2>Resend unlock instructions</h2>
+<!-- <h2>Resend unlock instructions</h2> -->
+<h2>アカウントの凍結解除手続きのご案内</h2>
 
 <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
@@ -9,7 +10,8 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Resend unlock instructions" %>
+    <%#= f.submit "Resend unlock instructions" %>
+    <%= f.submit "送信" %>
   </div>
 <% end %>
 

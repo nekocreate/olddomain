@@ -186,32 +186,114 @@
     <% bl_syurui = etc + wikipedia + or_ + facebook + twitter + gov + edu + museum + musicmoz + dmoz + youtube + linkedin + tumblr + myspace + plus_google + pinterest + matome_naver + okwave %>
     <%# バックリンクの種類判定の処理 ここまで ############################################### %>
 
-    <tr>
-      <td nowrap class="domain"><input type="checkbox" id="row_<%= each_count+1 %>" value="1" name="row_<%= each_count+1 %>"><%= d.name %></td><%# name %>
-      <td class="pr"><%= d.pr %></td><%# pr %>
-      <!-- <td nowrap><a href="domain/bigcatphotography_org.html" class="popup">BL詳細</a></td> --><%# BL詳細 %>
-      <td class="blsyousai"><%= link_to "BL詳細", domain_path(d.id), class: "popup" %></td><%# BL詳細 %>
-      <!-- <td nowrap><a href="http://web.archive.org/web/*/bigcatphotography.org" class="popup">wybk</a></td> --><%# wayback %>
-      <td class="wayback"><%= link_to "wybk", d.wayback, class: "popup" %></td><%# wayback %>
-      <!-- <td nowrap><a href="http://seocheki.net/site-check.php?u=www.bigcatphotography.org" class="popup">ﾁｪｷ</a></td> --><%# seocheki %>
-      <td class="cheki"><%= link_to "ﾁｪｷ", d.seocheki, class: "popup" %></td><%# seocheki %>
-      <td class="index_count"><%= d.index_count %></td><%# index_count %>
-      <td class="dofollow_pr"><%= d.dofollow_pr %></td><%# dofollow_pr %>
-      <td class="nofollow_pr"><%= d.nofollow_pr %></td><%# nofollow_pr %>
-      <td class="ip_bunsanritsu"><%= d.ip_bunsanritsu %></td><%# IP分散率 ip_bunsanritsu %>
-      <td class="ip_unique_count"><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
-      <td class="ip_all_count"><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
-      <td class="china"><%= china %></td><%# china 中国リンク %>
-      <!-- <td></td> --><%# 要注意 %>
-      <td class="moz_rank"><%= d.moz_rank %></td><%# moz_rank %>
-      <td class="moz_da"><%= d.moz_da %></td><%# moz_da %>
-      <td class="moz_pa"><%= d.moz_pa %></td><%# moz_pa %>
-      <!-- <td>33</td> --><%# ahref dr %>
-      <!-- <td>17</td> --><%# ahref bld %>
-      <td class="awy"><%= d.awy %></td><%# awy %>
-      <td nowrap><%= bl_syurui.html_safe %></td>
-    </tr>
-    
+
+    <%# ドメインの一部を伏せ字にする処理 ここから ############################################### %>
+    <% begin %>
+        <% domain = d.name %>
+        <% domain.downcase! %>
+        <% str = domain %>
+        <% p = str.index(".") %><%# カンマの位置 %>
+        <% chikan_str = str[1..p-2] %><%# domain名の文字列の先頭末尾の文字列を除外して切り取る %>
+        <% fusemoji = "*" %>
+        <% chikan_str.length.times{ fusemoji = fusemoji + "*" } %>
+        <% domain = domain.gsub(chikan_str,fusemoji) %>
+    <% rescue %><% domain = "エラー" %>
+    <% end %>
+    <%# ドメインの一部を伏せ字にする処理 ここまで ############################################### %>
+
+    <%# 有料会員と無料会員で表示を切り替える ###################### %>
+    <% if current_user.promember? %>
+      <% domain_name = d.name %>
+    <% else %>
+      <% if d.pr >= 1 %>
+        <% domain_name = domain %>
+      <% else %>
+        <% domain_name = d.name %>
+      <% end %>
+    <% end %>
+
+    <% if current_user.promember? %>
+      <tr>
+        <td nowrap class="domain"><input type="checkbox" id="row_<%= each_count+1 %>" value="1" name="row_<%= each_count+1 %>"><%= domain_name %></td><%# name %>
+        <td class="pr"><%= d.pr %></td><%# pr %>
+        <!-- <td nowrap><a href="domain/bigcatphotography_org.html" class="popup">BL詳細</a></td> --><%# BL詳細 %>
+        <td class="blsyousai"><%= link_to "BL詳細", domain_path(d.id), class: "popup" %></td><%# BL詳細 %>
+        <!-- <td nowrap><a href="http://web.archive.org/web/*/bigcatphotography.org" class="popup">wybk</a></td> --><%# wayback %>
+        <td class="wayback"><%= link_to "wybk", d.wayback, class: "popup" %></td><%# wayback %>
+        <!-- <td nowrap><a href="http://seocheki.net/site-check.php?u=www.bigcatphotography.org" class="popup">ﾁｪｷ</a></td> --><%# seocheki %>
+        <td class="cheki"><%= link_to "ﾁｪｷ", d.seocheki, class: "popup" %></td><%# seocheki %>
+        <td class="index_count"><%= d.index_count %></td><%# index_count %>
+        <td class="dofollow_pr"><%= d.dofollow_pr %></td><%# dofollow_pr %>
+        <td class="nofollow_pr"><%= d.nofollow_pr %></td><%# nofollow_pr %>
+        <td class="ip_bunsanritsu"><%= d.ip_bunsanritsu %></td><%# IP分散率 ip_bunsanritsu %>
+        <td class="ip_unique_count"><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
+        <td class="ip_all_count"><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
+        <td class="china"><%= china %></td><%# china 中国リンク %>
+        <!-- <td></td> --><%# 要注意 %>
+        <td class="moz_rank"><%= d.moz_rank %></td><%# moz_rank %>
+        <td class="moz_da"><%= d.moz_da %></td><%# moz_da %>
+        <td class="moz_pa"><%= d.moz_pa %></td><%# moz_pa %>
+        <!-- <td>33</td> --><%# ahref dr %>
+        <!-- <td>17</td> --><%# ahref bld %>
+        <td class="awy"><%= d.awy %></td><%# awy %>
+        <td nowrap><%= bl_syurui.html_safe %></td>
+      </tr>
+    <% else %>
+      <% if d.pr >= 1 %>  
+        <tr>
+          <td nowrap class="domain"><input type="checkbox" id="row_<%= each_count+1 %>" value="1" name="row_<%= each_count+1 %>"><%= domain_name %></td><%# name %>
+          <td class="pr"><%= d.pr %></td><%# pr %>
+          <!-- <td nowrap><a href="domain/bigcatphotography_org.html" class="popup">BL詳細</a></td> --><%# BL詳細 %>
+          <td class="blsyousai">*****</td><%# BL詳細 %>
+          <!-- <td nowrap><a href="http://web.archive.org/web/*/bigcatphotography.org" class="popup">wybk</a></td> --><%# wayback %>
+          <td class="wayback">*****</td><%# wayback %>
+          <!-- <td nowrap><a href="http://seocheki.net/site-check.php?u=www.bigcatphotography.org" class="popup">ﾁｪｷ</a></td> --><%# seocheki %>
+          <td class="cheki">*****</td><%# seocheki %>
+          <td class="index_count"><%= d.index_count %></td><%# index_count %>
+          <td class="dofollow_pr"><%= d.dofollow_pr %></td><%# dofollow_pr %>
+          <td class="nofollow_pr"><%= d.nofollow_pr %></td><%# nofollow_pr %>
+          <td class="ip_bunsanritsu"><%= d.ip_bunsanritsu %></td><%# IP分散率 ip_bunsanritsu %>
+          <td class="ip_unique_count"><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
+          <td class="ip_all_count"><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
+          <td class="china"><%= china %></td><%# china 中国リンク %>
+          <!-- <td></td> --><%# 要注意 %>
+          <td class="moz_rank"><%= d.moz_rank %></td><%# moz_rank %>
+          <td class="moz_da"><%= d.moz_da %></td><%# moz_da %>
+          <td class="moz_pa"><%= d.moz_pa %></td><%# moz_pa %>
+          <!-- <td>33</td> --><%# ahref dr %>
+          <!-- <td>17</td> --><%# ahref bld %>
+          <td class="awy"><%= d.awy %></td><%# awy %>
+          <td nowrap><%= bl_syurui.html_safe %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td nowrap class="domain"><input type="checkbox" id="row_<%= each_count+1 %>" value="1" name="row_<%= each_count+1 %>"><%= domain_name %></td><%# name %>
+          <td class="pr"><%= d.pr %></td><%# pr %>
+          <!-- <td nowrap><a href="domain/bigcatphotography_org.html" class="popup">BL詳細</a></td> --><%# BL詳細 %>
+          <td class="blsyousai"><%= link_to "BL詳細", domain_path(d.id), class: "popup" %></td><%# BL詳細 %>
+          <!-- <td nowrap><a href="http://web.archive.org/web/*/bigcatphotography.org" class="popup">wybk</a></td> --><%# wayback %>
+          <td class="wayback"><%= link_to "wybk", d.wayback, class: "popup" %></td><%# wayback %>
+          <!-- <td nowrap><a href="http://seocheki.net/site-check.php?u=www.bigcatphotography.org" class="popup">ﾁｪｷ</a></td> --><%# seocheki %>
+          <td class="cheki"><%= link_to "ﾁｪｷ", d.seocheki, class: "popup" %></td><%# seocheki %>
+          <td class="index_count"><%= d.index_count %></td><%# index_count %>
+          <td class="dofollow_pr"><%= d.dofollow_pr %></td><%# dofollow_pr %>
+          <td class="nofollow_pr"><%= d.nofollow_pr %></td><%# nofollow_pr %>
+          <td class="ip_bunsanritsu"><%= d.ip_bunsanritsu %></td><%# IP分散率 ip_bunsanritsu %>
+          <td class="ip_unique_count"><%= d.ip_unique_count %></td><%# ip_unique_count 重複しないIP %>
+          <td class="ip_all_count"><%= d.ip_all_count %></td><%# ip_all_count 全IP数 %>
+          <td class="china"><%= china %></td><%# china 中国リンク %>
+          <!-- <td></td> --><%# 要注意 %>
+          <td class="moz_rank"><%= d.moz_rank %></td><%# moz_rank %>
+          <td class="moz_da"><%= d.moz_da %></td><%# moz_da %>
+          <td class="moz_pa"><%= d.moz_pa %></td><%# moz_pa %>
+          <!-- <td>33</td> --><%# ahref dr %>
+          <!-- <td>17</td> --><%# ahref bld %>
+          <td class="awy"><%= d.awy %></td><%# awy %>
+          <td nowrap><%= bl_syurui.html_safe %></td>
+        </tr>
+      <% end %>
+    <% end %>
+
     <% each_count += 1 %>
   <% end %>
   </tbody>

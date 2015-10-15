@@ -45,8 +45,17 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users do
+    member do
+      post "pro_upgrade"
+    end
+    collection do
+      #post "pro_upgrade"
+    end
+  end
  
-  resources :users, only: [:index, :update, :destroy]
+  #resources :users, only: [:index, :update, :destroy]
+  resources :users
   
   # createはテープルに登録する newは登録画面 indexはドメインのテーブル表1ページで表示する
   # showアクションを使わないのは、showアクションはrouteで生成されるurlのパターンに「:id」を含んでしまうため。

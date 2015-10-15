@@ -1,16 +1,17 @@
-<h2>Sign up</h2>
+<h2>ユーザー登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%#= devise_error_messages! %>
   
   <% if false %>
-  <%= request.referrer %>
+  request.referrer:<%= request.referrer %><br />
   twitter認証の場合は、以下がrequest.referrerとなっている。
   https://api.twitter.com/oauth/authenticate?oauth_token=XYDpfgAAAAAAiCq8AAABUGCQIgc
   なので、twitter認証の場合は、別のメッセージを表示させる。
   <% end %>
   
-  <% if request.referrer.include?("api.twitter.com/oauth/") %>
+
+  <% if request.referrer.present? && request.referrer.include?("api.twitter.com/oauth/") %>
     <p>お手数をお掛け致しますが、初回のみ、メールアドレスとパスワードを入力して下さい。</p>
     <p>次回からは</p>
       <%= image_tag @signintwitter %>
@@ -20,18 +21,20 @@
     <%= devise_error_messages! %>
   <% end %>
 
+
+
   <!-- <div class="field"> -->
     <%#= f.label :handlename,"ハンドルネーム" %><br />
     <%= f.hidden_field :handlename, autofocus: true %>
   <!-- </div> -->
 
   <div class="field">
-    <%= f.label :email %>
+    <%= f.label :email ,"メールアドレス"%><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password ,"パスワード"%>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
@@ -39,7 +42,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation ,"パスワードの確認"%><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 

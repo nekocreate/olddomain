@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :admin_user,     only: [:index, :update, :destroy]
+    #before_action :admin_user,     only: [:index, :update, :destroy]
     
     def index
         @users = User.all
@@ -15,6 +15,14 @@ class UsersController < ApplicationController
     flash[:success] = params[:id] + "をアップデートしました。"
     #redirect_to edit_user_path(@user)
     redirect_to request.referrer
+    end
+    
+    def pro_upgrade
+        # render text: params[:id]
+        @user = User.find(params[:id])
+        @user.update(promember: 'true')
+        flash[:success] = @user.email + "をプロメンバーにアップグレードしました。"
+        redirect_to request.referrer || root_path
     end
     
     def destroy

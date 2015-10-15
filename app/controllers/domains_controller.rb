@@ -37,7 +37,16 @@ class DomainsController < ApplicationController
     domain_backlink_data_check
     @domain = Domain.find(params[:id])
     @domain_name = @domain.name
+    @domain_pr = @domain.pr
     @backlinks = Backlink.where(domain: @domain.name)
+    
+    # 有料会員以外
+    if !current_user.promember
+      if @domain_pr >= 1 # ページランクが1以上
+        redirect_to root_path # root_pathへリダイレクト
+        # redirect_to ****** # 有料会員登録を勧めるページへリダイレクトさせるのも良い
+      end
+    end
   end
   
   # 全ドメイン一覧を表示する
