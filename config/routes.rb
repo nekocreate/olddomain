@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     end
   end
  
+  resources :forums
   resources :users, only: [:index, :update, :destroy]
   # resources :users
   
