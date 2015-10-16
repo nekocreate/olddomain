@@ -10,11 +10,11 @@ class UsersController < ApplicationController
     #end
 
     def update
-    @user = User.find(params[:id])
-    @user.update(handlename: params[:user][:handlename], admin: params[:user][:admin])
-    flash[:success] = params[:id] + "をアップデートしました。"
-    #redirect_to edit_user_path(@user)
-    redirect_to request.referrer
+        @user = User.find(params[:id])
+        @user.update(handlename: params[:user][:handlename], admin: params[:user][:admin])
+        flash[:success] = params[:id] + "をアップデートしました。"
+        #redirect_to edit_user_path(@user)
+        redirect_to request.referrer
     end
     
     def pro_upgrade

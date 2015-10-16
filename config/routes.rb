@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
 
 
-  get 'welcome/import' # ドメインインポート用
+  # get 'welcome/import' # ドメインインポート用
   get 'welcome/no_data' # ドメイン・バックリンクデータが存在しない場合の仮のペラページ
   get 'welcome/test' # テスト用
 
@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   end
  
   resources :forums
+  resources :manage, only: [:index]
   resources :users, only: [:index, :update, :destroy]
   # resources :users
   

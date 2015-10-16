@@ -29,5 +29,8 @@ module Olddomain
     
     # 以下はrails5では廃止になるらしい　翻訳が正確でないかも
     # config.serve_static_assets = true
+    
+    # タイムゾーンを東京(JST +9:00)に設定
+    config.time_zone = 'Tokyo'
   end
 end
