@@ -33,6 +33,9 @@ class ForumsController < ApplicationController
     # 各フォーラムごとのページを表示 forum_path()
     def show
         @forum = Forum.find(params[:id])
+        @respost = Respost.new
+        @resposts = Respost.all
+        @users = User.all
     end
     
     # フォーラムを削除
@@ -46,8 +49,8 @@ class ForumsController < ApplicationController
     private
     
     def forum_params
-    # params[:message]のパラメータで name , bodyのみを許可する。
-    # 返り値は ex:) {name: "入力されたname" , body: "入力されたbody" }
+    # params[:forum]のパラメータで title , descriptionのみを許可する。
+    # 返り値は ex:) {title: "入力されたtitle" , description: "入力されたdescription" }
     params.require(:forum).permit(:title, :description)
     end
 

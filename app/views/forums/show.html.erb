@@ -1,3 +1,91 @@
-<p>forum show</p>
-<%= @forum.title %><br />
-<%= @forum.description %><br />
+<div class="col-sm-8 col-sm-offset-2">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title text-center">
+    <strong><%= @forum.title %></strong>
+    </h1>
+  </div>
+  <div class="panel-body">
+    <%= @forum.description %>
+  </div>
+</div>
+</div>
+
+forum_id:<%= @forum.id %><br />
+user_id:<%= current_user.id %><br />
+
+
+<div class="col-sm-8 col-sm-offset-2">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title text-center">
+    <strong>書き込みフォーム</strong>
+    </h1>
+  </div>
+  <div class="panel-body">
+    <% if false %>
+      <%# 直接コントローラーとアクションを指定する方法でも可能 %>
+      <%= form_for(@respost, :url => {:controller => 'resposts', :action => 'create'}) do |f| %>
+        <%= f.label :title, "タイトル" %><br />
+        <%= f.text_field :title, class: "input-xlarge" %><br />
+        <%= f.label :content, "本文" %><br />
+        <%= f.text_area :content, class: "input-xlarge" %><br />
+        <%= f.submit class: "btn btn-sm btn-primary" %>
+      <% end %>
+    <% end %>
+    <%= form_for(@respost) do |f| %>
+      <div class="form-group">
+        <%= f.hidden_field :forum_id, value: @forum.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.label :title, "タイトル" %><br />
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content, "本文" %><br />
+        <%= f.text_area :content, class: "form-control", rows: 8 %>
+      </div>
+      <%= f.submit "投稿する", class: "btn btn-sm btn-primary" %>
+    <% end %>
+  </div>
+</div>
+</div>
+
+
+<% @resposts.each do |t| %>
+<div class="col-sm-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title text-center">
+                <strong><%= t.title %></strong>
+            </h1>
+        </div>
+        <div class="panel-body">
+            <% user = @users.find_by(id: t.user_id) %>
+            <div class="col-sm-6">
+                投稿者：<strong><%= user.handlename %></strong> さん
+            </div>
+            <div class="col-sm-6">
+                <% d = t.created_at %>
+                投稿日：<%= d.strftime("%Y年%m月%d日 %H:%M:%S") %>  
+            </div>
+            <p>&nbsp;</p>
+            <div class="col-sm-12">
+                <p>
+                    respost id:<%= t.id %><br />
+                <%= t.content %>
+                </p>
+            </div>
+            <p>&nbsp;</p>
+            <div class="col-sm-12">
+                <p>書き込みを編集する｜書き込みを削除する</p>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
+
+
+
+
+
+

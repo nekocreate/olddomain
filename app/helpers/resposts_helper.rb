@@ -1,0 +1,2 @@
+module RespostsHelper
+end

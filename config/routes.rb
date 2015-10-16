@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     end
   end
  
+  resources :resposts
   resources :forums, only: [:index, :update, :create, :show, :destroy]
   resources :manage, only: [:index]
   resources :users, only: [:index, :update, :destroy]
