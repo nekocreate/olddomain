@@ -1,8 +1,9 @@
 class ForumsController < ApplicationController
-
+    before_action :admin_user
+    
     # フォーラムの作成画面を表示する new_forum_path
-    def new
-    end
+    # def new
+    # end
     
     # フォーラムを作ってデータベースに登録
     def create
@@ -13,8 +14,8 @@ class ForumsController < ApplicationController
     end
     
     # 作成したフォーラムの編集画面 edit_forum_path()
-    def edit
-    end
+    # def edit
+    # end
     
     # フォーラムデータ（データベース）を更新する
     def update
@@ -26,10 +27,12 @@ class ForumsController < ApplicationController
     
     # フォーラム一覧の表示 forums_path
     def index
+        @forums = Forum.all
     end
     
     # 各フォーラムごとのページを表示 forum_path()
     def show
+        @forum = Forum.find(params[:id])
     end
     
     # フォーラムを削除
@@ -40,10 +43,15 @@ class ForumsController < ApplicationController
         redirect_to request.referrer || manage_index_path        
     end
 
- private
-  def forum_params
+    private
+    
+    def forum_params
     # params[:message]のパラメータで name , bodyのみを許可する。
     # 返り値は ex:) {name: "入力されたname" , body: "入力されたbody" }
     params.require(:forum).permit(:title, :description)
-  end
+    end
+
+    def admin_user
+        redirect_to root_path unless current_user.admin?
+    end
 end

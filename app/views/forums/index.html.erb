@@ -1,1 +1,30 @@
-<p>forum index</p>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h1 class="panel-title">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			フォーラム一覧
+		</h1>
+	</div>
+    <div class="panel-body">
+        <p>
+        </p>
+    </div>
+    <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th width="50%">フォーラムタイトル</th>
+            <th>説明</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @forums.each do |t| %>
+            <tr>
+                <td><h4><%=link_to t.title, forum_path(t.id) %></h4></td>
+                <td><%= t.description %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+    </div>
+</div>
