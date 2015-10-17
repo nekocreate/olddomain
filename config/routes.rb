@@ -41,16 +41,22 @@ Rails.application.routes.draw do
     end
     
     collection do
-      post "import"
+      post 'import'
     end
   end
 
   resources :users do
     member do
-      post "pro_upgrade"
+      post 'pro_upgrade'
     end
     collection do
       #post "pro_upgrade"
+    end
+  end
+  
+  resources :forums do
+    collection do
+      get 'message'
     end
   end
  

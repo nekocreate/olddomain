@@ -1,4 +1,8 @@
 class RespostsController < ApplicationController
+    # deviseによるアクセス制限 ログインしていなければアクセス不可
+    before_action :authenticate_user!
+    
+    before_action :no_promember
     # 本人以外による :edit :update :destroy は許可せずroot_pathへリダイレクト
     before_action :admin_user, only: [:edit, :update, :destroy]
 
@@ -72,4 +76,9 @@ class RespostsController < ApplicationController
         end
     end
 
+    def no_promember
+        if !current_user.admin? && !current_user.promember?
+           redirect_to message_forums_path
+        end
+    end
 end

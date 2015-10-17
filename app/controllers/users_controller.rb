@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-    #before_action :admin_user,     only: [:index, :update, :destroy]
+    # deviseによるアクセス制限 ログインしていなければアクセス不可
+    before_action :authenticate_user!
+    
+    before_action :admin_user
     
     def index
         @users = User.all

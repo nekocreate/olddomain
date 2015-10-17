@@ -1,4 +1,5 @@
 class ForumsController < ApplicationController
+    before_action :no_promember, only: [:show]
     before_action :admin_user, only: [:create, :update, :destroy]
     
     # フォーラムの作成画面を表示する new_forum_path
@@ -61,5 +62,11 @@ class ForumsController < ApplicationController
 
     def admin_user
         redirect_to root_path unless current_user.admin?
+    end
+
+    def no_promember
+        if !current_user.admin? && !current_user.promember?
+           redirect_to message_forums_path
+        end
     end
 end
