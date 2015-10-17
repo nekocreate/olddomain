@@ -1,5 +1,5 @@
 <div class="col-sm-8 col-sm-offset-2">
-<div class="panel panel-default">
+<div class="panel panel-primary">
   <div class="panel-heading">
     <h1 class="panel-title text-center">
     <strong><%= @forum.title %></strong>
@@ -16,7 +16,7 @@ user_id:<%= current_user.id %><br />
 
 
 <div class="col-sm-8 col-sm-offset-2">
-<div class="panel panel-default">
+<div class="panel panel-success">
   <div class="panel-heading">
     <h1 class="panel-title text-center">
     <strong>書き込みフォーム</strong>
@@ -53,7 +53,7 @@ user_id:<%= current_user.id %><br />
 
 <% @resposts.each do |t| %>
 <div class="col-sm-12">
-    <div class="panel panel-default">
+    <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title text-center">
                 <strong><%= t.title %></strong>
@@ -61,9 +61,15 @@ user_id:<%= current_user.id %><br />
         </div>
         <div class="panel-body">
             <% user = @users.find_by(id: t.user_id) %>
-            <div class="col-sm-6">
-                投稿者：<strong><%= user.handlename %></strong> さん
-            </div>
+            <% if user.present? %><%# 投稿したユーザーの存在をチェック %>
+                <div class="col-sm-6">
+                    投稿者：<strong><%= user.handlename %></strong> さん
+                </div>
+            <% else %><%# 投稿者がデータベースに存在しなければ %>
+                <div class="col-sm-6">
+                    投稿者が退会済です
+                </div>            
+            <% end %>
             <div class="col-sm-6">
                 <% d = t.created_at %>
                 投稿日：<%= d.strftime("%Y年%m月%d日 %H:%M:%S") %>  
@@ -83,9 +89,3 @@ user_id:<%= current_user.id %><br />
     </div>
 </div>
 <% end %>
-
-
-
-
-
-
