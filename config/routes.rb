@@ -54,15 +54,16 @@ Rails.application.routes.draw do
     end
   end
  
-  resources :resposts
-  resources :forums, only: [:index, :update, :create, :show, :destroy]
+  resources :replayposts, only: [:new, :create, :edit, :update, :destroy]
+  resources :resposts, only: [:create, :edit, :update, :destroy]
+  resources :forums, only: [:index, :show, :create, :update, :destroy]
   resources :manage, only: [:index]
   resources :users, only: [:index, :update, :destroy]
   # resources :users
   
   # createはテープルに登録する newは登録画面 indexはドメインのテーブル表1ページで表示する
   # showアクションを使わないのは、showアクションはrouteで生成されるurlのパターンに「:id」を含んでしまうため。
-  resources :domains, only: [:create, :new, :index, :show]
+  resources :domains, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,0 +1,35 @@
+<p><%= link_to "フォーラムへ戻る", forum_path(@replaypost.forum_id) %></p>
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h1 class="panel-title text-center">
+            <strong>返信 編集フォーム</strong>
+            </h1>
+        </div>
+        <div class="panel-body">
+            <%= form_for(@replaypost) do |f| %>
+                <div class="form-group">
+                    <%#= f.hidden_field :forum_id, value: @forum.id %>
+                    <%#= f.hidden_field :user_id, value: current_user.id %>
+                    <%= f.hidden_field :forum_id, value: @replaypost.forum_id %>
+                    <%= f.label :title, "タイトル" %><br />
+                    <%= f.text_field :title, class: "form-control" %>
+                </div>
+                <div class="form-group">
+                    <%= f.label :content, "本文" %><br />
+                    <%= f.text_area :content, class: "form-control", rows: 8 %>
+                </div>
+                <% if current_user.handlename.present? %>
+                    <%= f.submit "編集する", class: "btn btn-sm btn-primary" %>
+                <% else %>
+                    <p>あなたのハンドルネームがまだ設定されていません。<br/>
+                    投稿する前に以下のページでハンドルネームを設定してください。<br />
+                    ハンドルネームが設定されている場合、『投稿ボタン』が表示されます。
+                    </p>
+                    <%= link_to 'ユーザー情報編集', edit_user_registration_path %>               
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
+

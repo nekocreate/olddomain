@@ -1,5 +1,5 @@
 class ForumsController < ApplicationController
-    before_action :admin_user
+    before_action :admin_user, only: [:create, :update, :destroy]
     
     # フォーラムの作成画面を表示する new_forum_path
     # def new
@@ -27,14 +27,19 @@ class ForumsController < ApplicationController
     
     # フォーラム一覧の表示 forums_path
     def index
-        @forums = Forum.all
+        @forums = Forum.order(created_at: :desc)
+        # 以下は上記と同じ
+        # @forums = Forum.all.order(created_at: :desc)
+        #@formus = Forum.order(:created_at).reverse_order
     end
     
     # 各フォーラムごとのページを表示 forum_path()
     def show
         @forum = Forum.find(params[:id])
         @respost = Respost.new
-        @resposts = Respost.all
+        # @resposts = Respost.order(created_at: :desc)
+        @resposts = Respost.order(updated_at: :desc)
+        @replayposts = Replaypost.all
         @users = User.all
     end
     

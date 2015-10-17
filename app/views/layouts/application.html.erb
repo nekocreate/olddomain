@@ -1,70 +1,70 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Olddomain</title>
-  <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-  <% if content_for?(:head) %>
-    <%= yield :head %>
+  <head>
+    <title>Olddomain</title>
+    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <% if content_for?(:head) %>
+      <%= yield :head %>
+    <% end %>
+  </head>
+
+  <% if content_for?(:body) %>
+    <%= yield :body %>
+  <% else %>
+    <body>
   <% end %>
-</head>
 
-<% if content_for?(:body) %>
-  <%= yield :body %>
-<% else %>
-  <body>
-<% end %>
-
-  <div id="wrap">
+  <div id="wrap"> 
     <div class="container">
       <% if content_for?(:header) %>
         <%= yield :header %>
       <% else %>
         <%= render 'layouts/header' %>
       <% end %>
-  
-      <div id="notice">
-        <% flash.each do |message_type, message| %><!-- フラッシュメッセージを表示ここから -->
-          <div class="alert alert-<%= message_type %>"><%= message %></div>
-        <% end %><!-- フラッシュメッセージを表示ここまで -->
-      </div>
-  
-      <article>
-          <section>
-              <%= yield %>
-          </section>
-      </article>
+    
+    <div id="notice">
+      <% flash.each do |message_type, message| %><!-- フラッシュメッセージを表示ここから -->
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %><!-- フラッシュメッセージを表示ここまで -->
+    </div>
+    
+    <article>
+      <section>
+        <%= yield %>
+      </section>
+    </article>
     
     </div><!-- container -->
   </div><!-- wrap -->
-
+  
   <footer id="footer">
     <div class="container">
-        <div class="copyright">
-          <p>
+      <div class="copyright">
+        <p>
           <br/>Copyright (C) サイトタイトル All Rights Reserved.
-          </p>
-        </div>
+        </p>
+      </div>
     </div>
   </footer>
-
+  
   <!-- フラッシュメッセージ消す -->
   <script>
-  $(function() {
-  	setTimeout(function() {
-  		$('#notice').fadeOut("slow");
-  	}, 10000);
-  });
+    $(function() {
+      setTimeout(function() {
+        $('#notice').fadeOut("slow");
+      }, 10000);
+    });
   </script>
   
   <% if content_for?(:footer_js) %>
     <%= yield :footer_js %>
   <% end %>
-
-</body>
+  
+  </body>
 </html>

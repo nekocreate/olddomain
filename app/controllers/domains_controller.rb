@@ -7,12 +7,12 @@ class DomainsController < ApplicationController
 
   
   # ドメインデータのcsvを登録するフォームを設置
-  def new
-  end
+  # def new
+  # end
   
   # domainモデルのテーブルにドメインデータを登録する
-  def create
-  end
+  # def create
+  # end
   
   def test
     @domains_ok = Domain.where(ngcheck: "ok")

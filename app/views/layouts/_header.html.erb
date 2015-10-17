@@ -14,6 +14,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><%= link_to "NGリスト", nglist_domains_path %></li>
 				    <li><%= link_to "ドメイン一覧", domains_path %></li>
+				    <li><%= link_to "フォーラム", forums_path %></li>
 				    
 						<!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
 						<% if user_signed_in? %> 
@@ -25,7 +26,7 @@
 						  <% else %>
 						  	<li><%= link_to '有料会員登録', pro_upgrade_user_path(id: current_user.id), method: :post %></li>
 						  <% end %>
-						  <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
+						  <li><%= link_to 'ユーザー情報設定', edit_user_registration_path %></li>
 						  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
 						<% else %>
 						  <li class="snsbtn"><%= link_to (image_tag @signintwitter), user_omniauth_authorize_path(:twitter) %></li>
@@ -61,5 +62,4 @@
 <% else %>
 <% end %>
 
-
-<%= link_to "forum index", forums_path %>
+<%= link_to "testページ", welcome_test_path, target: "_blank" %>
