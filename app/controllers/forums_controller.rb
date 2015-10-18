@@ -31,7 +31,7 @@ class ForumsController < ApplicationController
         @forums = Forum.order(created_at: :desc)
         # 以下は上記と同じ
         # @forums = Forum.all.order(created_at: :desc)
-        #@formus = Forum.order(:created_at).reverse_order
+        # @formus = Forum.order(:created_at).reverse_order
     end
     
     # 各フォーラムごとのページを表示 forum_path()
@@ -39,7 +39,9 @@ class ForumsController < ApplicationController
         @forum = Forum.find(params[:id])
         @respost = Respost.new
         # @resposts = Respost.order(created_at: :desc)
-        @resposts = Respost.order(updated_at: :desc)
+        # @resposts = Respost.order(updated_at: :desc)
+        # 以下はkaminari適用
+        @resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5)
         @replayposts = Replaypost.all
         @users = User.all
     end
