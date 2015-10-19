@@ -8,9 +8,11 @@
         </div>
         <div class="panel-body">
             <%= form_for(@replaypost) do |f| %>
+                <%= render 'shared/error_messages', object: f.object %><%# バリデーションのエラーメッセージ %>
                 <div class="form-group">
                     <%#= f.hidden_field :forum_id, value: @forum.id %>
                     <%#= f.hidden_field :user_id, value: current_user.id %>
+                    <%= f.hidden_field :replaytime, value: DateTime.now %>
                     <%= f.hidden_field :forum_id, value: @replaypost.forum_id %>
                     <%= f.label :title, "タイトル" %><br />
                     <%= f.text_field :title, class: "form-control" %>

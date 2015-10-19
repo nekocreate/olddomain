@@ -39,6 +39,7 @@ user_id:<%= current_user.id %><br />
         <%= render 'shared/error_messages', object: f.object %><%# バリデーションのエラーメッセージ %>
 
         <div class="form-group">
+            <%= f.hidden_field :replaytime, value: DateTime.now %><%# 最終更新日 %>
             <%= f.hidden_field :forum_id, value: @forum.id %>
             <%= f.hidden_field :user_id, value: current_user.id %>
             <%= f.label :title, "タイトル" %><br />

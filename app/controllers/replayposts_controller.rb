@@ -17,9 +17,15 @@ class ReplaypostsController < ApplicationController
     
     # 返信を作ってデータベースに登録
     def create
-       # render text: params
+        # render text: params
         @replaypost = Replaypost.new(replaypost_params)
+        
+        @respost = Respost.find(params[:replaypost][:respost_id]) # 親のrespost(投稿)を取得
         if @replaypost.save
+            
+            # updated_atを更新せずにreplaytimeカラムのみ変更
+            @respost.update_columns(replaytime: DateTime.now)
+            
             flash[:success] = "返信を投稿しました。"
             # redirect_to forum_path(params[:replaypost][:forum_id])
         ##    redirect_to request.referrer || forum_path(params[:respost][:forum_id])
@@ -33,10 +39,6 @@ class ReplaypostsController < ApplicationController
             #@user = User.find(params[:replaypost][:user_id])
             # render text: @replaypost.errors.inspect
             flash[:danger] = "返信の投稿失敗"
-            ##### バリデーションのエラーメッセージの表示がうまくいかない
-            #@errors = @replaypost.errors
-            #redirect_to request.referrer
-            
             render 'replayposts/new'
         end
     end
@@ -51,10 +53,19 @@ class ReplaypostsController < ApplicationController
         #render text: params[:replaypost][:forum_id]
         #render text: params
         @replaypost = Replaypost.find(params[:id])
-        @replaypost.update(title: params[:replaypost][:title], content: params[:replaypost][:content])
-        flash[:success] = "返信をアップデートしました。"
-        #redirect_to request.referrer
-        redirect_to forum_path(params[:replaypost][:forum_id])
+        @respost = Respost.find(@replaypost.respost_id) # 親のrespost(投稿)を取得
+        
+        if @replaypost.update(title: params[:replaypost][:title], content: params[:replaypost][:content], replaytime: params[:replaypost][:replaytime])
+            flash[:success] = "返信をアップデートしました。"
+            #redirect_to request.referrer
+            redirect_to forum_path(params[:replaypost][:forum_id])
+            
+        else
+            @forum = Forum.find(params[:replaypost][:forum_id])
+            
+            render 'replayposts/edit'
+            
+        end
     end
     
     # 返信一覧の表示 replayposts_path
@@ -74,7 +85,14 @@ class ReplaypostsController < ApplicationController
         @replaypost.destroy
         flash[:success] = "返信を削除しました。"
         #redirect_to request.referrer
-        redirect_to request.referrer || forum_path(params[:forum_id])       
+        if request.referrer.include?("forums")
+            redirect_to request.referrer || forum_path(params[:forum_id])
+        end
+        
+        if request.referrer.include?("resposts")
+            redirect_to request.referrer || respost_path(params[:respost_id])
+        end
+        
     end
 
     private
@@ -82,7 +100,7 @@ class ReplaypostsController < ApplicationController
     def replaypost_params
     # params[:replaypost]のパラメータで title , contentのみを許可する。
     # 返り値は ex:) {title: "入力されたtitle" , content: "入力されたcontent" }
-    params.require(:replaypost).permit(:forum_id, :respost_id, :user_id, :title, :content)
+    params.require(:replaypost).permit(:forum_id, :respost_id, :user_id, :title, :content, :replaytime)
     end
     
     # 本人以外の場合はroot_pathにリダイレクト current_userがadmin の場合は除く

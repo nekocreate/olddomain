@@ -36,6 +36,19 @@
                 <%= @respost.content %>
                 </p>
             </div>
+            <!-- <p>&nbsp;</p> -->
+            <div class="col-sm-12">
+                <p><%#= link_to "返信", new_replaypost_path(forum_id: @forum.id, respost_id: t.id, user_id: current_user.id) %>
+                    <% if current_user.id == @respost.user_id || current_user.admin? %><%# 投稿者本人のみ編集・削除を可能とする %>
+                         | <%= link_to "書き込みを編集する",edit_respost_path(@respost.id) %> | 
+                        <%#= link_to "削除", t, class: "btnlink btnlink-danger glyphicon glyphicon-trash",
+                            method: :delete, data: {confirm: "本当に削除してもいいですか？"} %>
+                        <%# destroyアクションにforum_idというパラメータを渡して、投稿削除後にforumページへリダイレクトさせる %>
+                        <%= link_to "削除", respost_path(forum_id: @respost.forum_id), class: "btnlink btnlink-danger glyphicon glyphicon-trash",
+                            method: :delete, data: {confirm: "本当に削除してもいいですか？"} %>
+                    <% end %>
+                </p>
+            </div>
             <p>&nbsp;</p>
             <%# 返信された書き込み ここから ####################################################### %>
             <% @replayposts = @replayposts.where(respost_id: @respost.id) %>
@@ -71,6 +84,19 @@
                         <div class="col-sm-12">
                             <p>
                                 <%= t.content %>
+                            </p>
+                        </div>
+                        <!-- <p>&nbsp;</p> -->
+                        <div class="col-sm-12">
+                            <p>
+                                <% if current_user.id == t.user_id || current_user.admin? %><%# 投稿者本人のみ編集・削除を可能とする %>
+                                    <%= link_to "返信を編集する",edit_replaypost_path(t.id) %> | 
+                                    <%#= link_to "削除", t, class: "btnlink btnlink-danger glyphicon glyphicon-trash",
+                                        method: :delete, data: {confirm: "本当に削除してもいいですか？"} %>
+                                    <%# destroyアクションにrespost_idというパラメータを渡して、投稿削除後にこのページへリダイレクトさせる %>
+                                    <%= link_to "削除", replaypost_path(t.id, respost_id: @respost.id), class: "btnlink btnlink-danger glyphicon glyphicon-trash",
+                                        method: :delete, data: {confirm: "本当に削除してもいいですか？"} %>
+                                <% end %>
                             </p>
                         </div>
                     </div>

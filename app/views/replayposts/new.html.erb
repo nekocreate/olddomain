@@ -1,15 +1,3 @@
-<% if false %>
-@forum.inspect:<%= @forum.inspect %>
-<hr />
-@respost.inspect:<%= @respost.inspect %>
-<hr />
-@users.inspect:<%= @users.inspect %>
-<hr />
-@replaypost.inspect:<%@replaypost.inspect %>
-<hr />
-<%= ("Re:").length %><br />
-<% end %>
-
 <%= link_to "フォーラムへ戻る", forum_path(@forum) %>
 <h1 class="h3">『<%= @respost.title %>』への返信フォーム</h1>
 
@@ -120,6 +108,7 @@
             <%= form_for(@replaypost) do |f| %>
                 <%= render 'shared/error_messages', object: f.object %><%# バリデーションのエラーメッセージ %>
                 <div class="form-group">
+                    <%= f.hidden_field :replaytime, value: DateTime.now %>
                     <%= f.hidden_field :forum_id, value: @forum.id %>
                     <%= f.hidden_field :respost_id, value: @respost.id %>
                     <%= f.hidden_field :user_id, value: current_user.id %>

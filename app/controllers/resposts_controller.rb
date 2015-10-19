@@ -35,12 +35,16 @@ class RespostsController < ApplicationController
     # 投稿データ（データベース）を更新する
     def update
         #render text: params[:respost][:forum_id]
-        #render text: params
         @respost = Respost.find(params[:id])
-        @respost.update(title: params[:respost][:title], content: params[:respost][:content])
-        flash[:success] = "書き込みをアップデートしました。"
-        #redirect_to request.referrer
-        redirect_to forum_path(params[:respost][:forum_id])
+        if @respost.update(title: params[:respost][:title], content: params[:respost][:content], replaytime: params[:respost][:replaytime])
+            flash[:success] = "書き込みをアップデートしました。"
+            #redirect_to request.referrer
+            redirect_to forum_path(params[:respost][:forum_id])
+        else
+           @forum = Forum.find(params[:respost][:forum_id])
+           flash[:danger] = "編集失敗"
+           render 'resposts/edit'
+        end
     end
     
     # 投稿一覧の表示 forums_path
@@ -66,16 +70,15 @@ class RespostsController < ApplicationController
         @respost = Respost.find(params[:id])
         @respost.destroy
         flash[:success] = "書き込みを削除しました。"
-        #redirect_to request.referrer
-        redirect_to request.referrer || forum_path(params[:forum_id])       
+        redirect_to forum_path(params[:forum_id]) # respost自体がなくなるのでforumのshowへリダイレクト
     end
 
     private
     
     def respost_params
-    # params[:respost]のパラメータで title , contentのみを許可する。
-    # 返り値は ex:) {title: "入力されたtitle" , content: "入力されたcontent" }
-    params.require(:respost).permit(:forum_id, :user_id, :title, :content)
+        # params[:respost]のパラメータで title , contentのみを許可する。
+        # 返り値は ex:) {title: "入力されたtitle" , content: "入力されたcontent" }
+        params.require(:respost).permit(:forum_id, :user_id, :title, :content, :replaytime)
     end
     
     # 本人以外の場合はroot_pathにリダイレクト current_userがadmin の場合は除く

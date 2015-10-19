@@ -8,18 +8,20 @@
         </div>
         <div class="panel-body">
         <%= form_for(@respost) do |f| %>
-              <div class="form-group">
+            <%= render 'shared/error_messages', object: f.object %><%# バリデーションのエラーメッセージ %>
+            <div class="form-group">
                 <%#= f.hidden_field :forum_id, value: @forum.id %>
                 <%#= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :replaytime, value: DateTime.now %><%# 最終更新日 %>
                 <%= f.hidden_field :forum_id, value: @respost.forum_id %>
                 <%= f.label :title, "タイトル" %><br />
                 <%= f.text_field :title, class: "form-control" %>
-              </div>
-              <div class="form-group">
+            </div>
+            <div class="form-group">
                 <%= f.label :content, "本文" %><br />
                 <%= f.text_area :content, class: "form-control", rows: 8 %>
-              </div>
-              <%= f.submit "編集する", class: "btn btn-sm btn-primary" %>
+            </div>
+                <%= f.submit "編集する", class: "btn btn-sm btn-primary" %>
         <% end %>
     </div>
 </div>

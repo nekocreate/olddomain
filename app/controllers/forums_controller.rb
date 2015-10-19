@@ -44,8 +44,9 @@ class ForumsController < ApplicationController
         # @resposts = Respost.order(updated_at: :desc)
         # 以下はkaminari適用
         ## @resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5)
-        #@resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5) # 降順
-        @resposts = Respost.where(forum_id: params[:id]).order(updated_at: :desc).page(params[:page]).per(5) # 降順
+        # @resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5) # 降順
+        # @resposts = Respost.where(forum_id: params[:id]).order(updated_at: :desc).page(params[:page]).per(5) # 降順
+        @resposts = Respost.where(forum_id: params[:id]).order(replaytime: :desc).page(params[:page]).per(5) # 降順
         @replayposts = Replaypost.all
         @users = User.all
     end

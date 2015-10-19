@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017091748) do
+ActiveRecord::Schema.define(version: 20151019222955) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",               default: "", null: false
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20151017091748) do
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "replaytime"
   end
 
   add_index "replayposts", ["forum_id"], name: "index_replayposts_on_forum_id"
@@ -96,6 +97,7 @@ ActiveRecord::Schema.define(version: 20151017091748) do
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "replaytime"
   end
 
   add_index "resposts", ["forum_id", "user_id", "created_at"], name: "index_resposts_on_forum_id_and_user_id_and_created_at"
