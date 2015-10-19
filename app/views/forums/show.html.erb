@@ -68,7 +68,7 @@ user_id:<%= current_user.id %><br />
     <div class="panel panel-info">
         <div class="panel-heading">
             <h1 class="panel-title text-center">
-                <strong><%= t.title %></strong><small class="pull-right">post_id:<%= t.id %></small>
+                <strong><%= t.title %></strong> <small><span style="text-decoration:underline;"><%= link_to "リンク", respost_path(t.id) %></span></small><small class="pull-right">post_id:<%= t.id %></small>
             </h1>
         </div>
         <div class="panel-body">

@@ -1,0 +1,152 @@
+<%= link_to "フォーラムへ戻る", forum_path(@respost.forum_id) %>
+<h1 class="h3">『<%= @respost.title %>』のページ</h1>
+
+<%# 投稿された書き込み ここから ####################################################### %>
+<%# @respost.each do |t| %>
+<div class="col-sm-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h1 class="panel-title text-center">
+                <strong><%= @respost.title %></strong><small class="pull-right">post_id:<%= @respost.id %></small>
+            </h1>
+        </div>
+        <div class="panel-body">
+            <% user = @users.find_by(id: @respost.user_id) %>
+            <% if user.present? %><%# 投稿したユーザーの存在をチェック %>
+                <div class="col-sm-4">
+                    投稿者：<strong><%= user.handlename %></strong> さん
+                </div>
+            <% else %><%# 投稿者がデータベースに存在しなければ %>
+                <div class="col-sm-4">
+                    投稿者が退会済です
+                </div>            
+            <% end %>
+            <div class="col-sm-4">
+                <%# d = t.created_at %>
+                投稿日：<%= @respost.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %>  
+            </div>
+            <div class="col-sm-4">
+                <% if @respost.updated_at != @respost.created_at %><%# 投稿が編集されていれば編集日を表示する %>
+                編集日：<%= @respost.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
+                <% end %>
+            </div>
+            <!-- <p>&nbsp;</p> -->
+            <div class="col-sm-12">
+                <p>
+                <%= @respost.content %>
+                </p>
+            </div>
+            <p>&nbsp;</p>
+            <%# 返信された書き込み ここから ####################################################### %>
+            <% @replayposts = @replayposts.where(respost_id: @respost.id) %>
+            <% @replayposts.each do |t| %>
+            <div class="col-sm-12">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h1 class="panel-title text-center">
+                            <strong><%= t.title %></strong><small class="pull-right">replay_id:<%= t.id %></small>
+                        </h1>
+                    </div>
+                    <div class="panel-body">
+                        <% user = @users.find_by(id: t.user_id) %>
+                        <% if user.present? %><%# 投稿したユーザーの存在をチェック %>
+                            <div class="col-sm-4">
+                                投稿者：<strong><%= user.handlename %></strong> さん
+                            </div>
+                        <% else %><%# 投稿者がデータベースに存在しなければ %>
+                            <div class="col-sm-4">
+                                投稿者が退会済です
+                            </div>            
+                        <% end %>
+                        <div class="col-sm-4">
+                            <%# d = t.created_at %>
+                            投稿日：<%= t.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %>  
+                        </div>
+                        <div class="col-sm-4">
+                            <% if t.updated_at != t.created_at %><%# 投稿が編集されていれば編集日を表示する %>
+                            編集日：<%= t.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
+                            <% end %>
+                        </div>
+                        <!-- <p>&nbsp;</p> -->
+                        <div class="col-sm-12">
+                            <p>
+                                <%= t.content %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+            <%# 返信された書き込み ここまで ####################################################### %>
+        </div>
+    </div>
+</div>
+<%# end %>
+<%# 投稿された書き込み ここまで ####################################################### %>
+
+<%# 返信書き込みフォーム ここから ##################################################### %>
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h1 class="panel-title text-center">
+                <strong>返信 書き込みフォーム</strong>
+            </h1>
+        </div>
+        <div class="panel-body">
+            <%# if false %>
+                <%# 直接コントローラーとアクションを指定する方法でも可能 %>
+                <%= form_for(@replaypost, :url => {:controller => 'replayposts', :action => 'create'}) do |f| %>
+                    <%= render 'shared/error_messages', object: f.object %><%# バリデーションのエラーメッセージ %>
+                    <div class="form-group">
+                        <%= f.hidden_field :forum_id, value: @respost.forum_id %>
+                        <%= f.hidden_field :respost_id, value: @respost.id %>
+                        <%= f.hidden_field :user_id, value: current_user.id %>
+                        <%= f.label :title, "タイトル" %><br />
+                        <%= f.text_field :title, value: "Re:#{@respost.title}", class: "form-control" %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.label :content, "本文" %><br />
+                        <%= f.text_area :content, class: "form-control", rows: 8 %>
+                    </div>
+                    <% if current_user.handlename.present? %>
+                        <%= f.submit "投稿する", class: "btn btn-sm btn-primary" %>
+                    <% else %>
+                        <p>あなたのハンドルネームがまだ設定されていません。<br/>
+                        投稿する前に以下のページでハンドルネームを設定してください。<br />
+                        ハンドルネームが設定されている場合、『投稿ボタン』が表示されます。
+                        </p>
+                        <%= link_to 'ユーザー情報編集', edit_user_registration_path %>
+                    <% end %>
+                <% end %>
+            <%# end %>
+            
+            <% if false %>
+            <%= form_for(@replaypost) do |f| %>
+                <%= render 'shared/error_messages', object: f.object %><%# バリデーションのエラーメッセージ %>
+                <div class="form-group">
+                    <%= f.hidden_field :forum_id, value: @forum.id %>
+                    <%= f.hidden_field :respost_id, value: @respost.id %>
+                    <%= f.hidden_field :user_id, value: current_user.id %>
+                    <%= f.label :title, "タイトル" %><br />
+                    <%= f.text_field :title, value: "Re:#{@respost.title}", class: "form-control" %>
+                </div>
+                <div class="form-group">
+                    <%= f.label :content, "本文" %><br />
+                    <%= f.text_area :content, class: "form-control", rows: 8 %>
+                </div>
+                <% if current_user.handlename.present? %>
+                    <%= f.submit "投稿する", class: "btn btn-sm btn-primary" %>
+                <% else %>
+                    <p>あなたのハンドルネームがまだ設定されていません。<br/>
+                    投稿する前に以下のページでハンドルネームを設定してください。<br />
+                    ハンドルネームが設定されている場合、『投稿ボタン』が表示されます。
+                    </p>
+                    <%= link_to 'ユーザー情報編集', edit_user_registration_path %>
+                <% end %>
+            <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
+<%# 返信書き込みフォーム ここまで ##################################################### %>
+

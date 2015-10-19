@@ -42,6 +42,7 @@ class ForumsController < ApplicationController
         # @resposts = Respost.order(created_at: :desc)
         # @resposts = Respost.order(updated_at: :desc)
         # 以下はkaminari適用
+        ## @resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5)
         @resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5)
         @replayposts = Replaypost.all
         @users = User.all

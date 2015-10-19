@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   end
  
   resources :replayposts, only: [:new, :create, :edit, :update, :destroy]
-  resources :resposts, only: [:create, :edit, :update, :destroy]
+  resources :resposts, only: [:show, :create, :edit, :update, :destroy]
   resources :forums, only: [:index, :show, :create, :update, :destroy]
   resources :manage, only: [:index]
   resources :users, only: [:index, :update, :destroy]

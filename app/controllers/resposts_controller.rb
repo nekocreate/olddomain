@@ -49,9 +49,16 @@ class RespostsController < ApplicationController
     # end
     
     # 各投稿ごとのページを表示 forum_path()
-    # def show
-    #    @respost = Respost.find(params[:id])
-    # end
+    def show
+        @respost = Respost.find(params[:id])
+
+        @replaypost = Replaypost.new
+        @replayposts = Replaypost.all
+        # @forum = Forum.find(params[:forum_id])
+        # @respost = Respost.find(params[:respost_id])
+        @users = User.all
+        # @user = User.find(params[:user_id])
+    end
     
     # 投稿を削除
     def destroy
