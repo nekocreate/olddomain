@@ -53,13 +53,19 @@
 	<% if current_user.admin? %>
 		admin:
 	<% end %>
-  <%= current_user.email %>
-  <% if current_user.promember? %>
-  	有料会員
-  <% else %>
-  	無料会員
-  <% end %>
-  </strong>でログイン中</p>
+	<%= current_user.email %> 
+	handlename:
+	<% if current_user.handlename.present? %>
+		<%= current_user.handlename %>
+	<% else %>
+		未設定
+	<% end %>
+	<% if current_user.promember? %>
+		有料会員
+	<% else %>
+		無料会員
+	<% end %>
+	</strong>でログイン中</p>
 <% else %>
 <% end %>
 

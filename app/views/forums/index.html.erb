@@ -31,5 +31,56 @@
     </div>
 </div>
 
-
-<%# if user_signed_in? %>
+<%# 自分の投稿や返信に関連するものを表示させる処理 ここから ######################################## %>
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h1 class="panel-title">
+			<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+			あなたに関するフォーラム及び投稿一覧
+		</h1>
+	</div>
+    <div class="panel-body">
+        <!-- 何か説明文を書く -->
+    </div>
+    <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th width="50%">フォーラムタイトル</th>
+            <th>投稿タイトル</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @forums.each do |t| %>
+            <% my_resposts = t.resposts.where(user_id: current_user.id) %><%# 自分の投稿 %>
+            <% my_replayposts = t.replayposts.where(user_id: current_user.id) %><%# 自分の返信 %>
+            <% if my_resposts.count > 0 || my_replayposts.count > 0 %><%# 自分の投稿または返信があれば %>
+                <tr>
+                    <td><h4><%=link_to t.title, forum_path(t.id) %></h4></td>
+                    <td>
+                        <%# resposts = t.resposts %>
+                        <% resposts = t.resposts.order(updated_at: :desc) %>
+                        <%# replayposts = t.replayposts %>
+                        <% respost_count = 1 %><%# 多数該当するrespostがある場合、途中でループを抜けるのでカウントを設定 %>
+                        <ul>
+                            <% resposts.each do |respost| %><%# 投稿 %>
+                                <% break if respost_count > 10 %><%# 10個以上になったらループを抜ける %>
+                                <% if (respost.user_id == current_user.id) || (respost.replayposts.where(user_id: current_user.id).count > 0) %>
+                                    <% respost_count +=1 %>
+                                    <li>
+                                        <%= respost.updated_at.strftime("%Y/%m/%d/ %H:%M") %> 
+                                        <%= link_to respost.title, respost_path(respost.id) %>
+                                    </li>
+                                    <hr style="margin:3px 3px;">
+                                <% end %>
+                            <% end %>
+                        </ul>
+                    </td>
+                </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+    </table>
+    </div>
+</div>
+<%# 自分の投稿や返信に関連するものを表示させる処理 ここまで ######################################## %>

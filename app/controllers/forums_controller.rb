@@ -29,10 +29,11 @@ class ForumsController < ApplicationController
     
     # フォーラム一覧の表示 forums_path
     def index
-        @forums = Forum.order(created_at: :desc)
+        @forums = Forum.order(created_at: :desc) # 降順
         # 以下は上記と同じ
         # @forums = Forum.all.order(created_at: :desc)
         # @formus = Forum.order(:created_at).reverse_order
+
     end
     
     # 各フォーラムごとのページを表示 forum_path()
@@ -43,7 +44,8 @@ class ForumsController < ApplicationController
         # @resposts = Respost.order(updated_at: :desc)
         # 以下はkaminari適用
         ## @resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5)
-        @resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5)
+        #@resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5) # 降順
+        @resposts = Respost.where(forum_id: params[:id]).order(updated_at: :desc).page(params[:page]).per(5) # 降順
         @replayposts = Replaypost.all
         @users = User.all
     end

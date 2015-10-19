@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     # deviseによるアクセス制限 ログインしていなければアクセス不可
     before_action :authenticate_user!
     
-    # before_action :admin_user
+    before_action :admin_user, only: [:update]
     
     def index
         @users = User.all
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        @user.update(handlename: params[:user][:handlename], admin: params[:user][:admin])
+        @user.update(handlename: params[:user][:handlename], admin: params[:user][:admin], promember: params[:user][:promember])
         flash[:success] = params[:id] + "をアップデートしました。"
         #redirect_to edit_user_path(@user)
         redirect_to request.referrer
