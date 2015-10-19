@@ -16,22 +16,6 @@ user_id:<%= current_user.id %><br />
 </div>
 </div>
 
-バリデーションのエラーメッセージ表示が上手くいかない<br />
-<% if @respost.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= @respost.errors.count %>件のエラーがあります。</h2>
- 
-    <ul>
-    <% @respost.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-
-
-
-
 <div class="col-sm-8 col-sm-offset-2">
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -51,15 +35,8 @@ user_id:<%= current_user.id %><br />
         <% end %>
     <% end %>
     <%= form_for(@respost) do |f| %>
-
-        バリデーションのエラーメッセージの表示が上手くいかない<br />
-        <% if @respost.errors.any? %>
-        エラー
-        <% end %>
-        @respost.errors.inspect:<%= @respost.errors.inspect %><br />
         
-        shared/error_messages:<%= render 'shared/error_messages', object: f.object %><br />
-        @errors:<%= @errors.inspect %><br/>
+        <%= render 'shared/error_messages', object: f.object %><%# バリデーションのエラーメッセージ %>
 
         <div class="form-group">
             <%= f.hidden_field :forum_id, value: @forum.id %>
@@ -117,8 +94,7 @@ user_id:<%= current_user.id %><br />
             <!-- <p>&nbsp;</p> -->
             <div class="col-sm-12">
                 <p>
-                    respost id:<%= t.id %><br />
-                <%= t.content %>
+                    <%= t.content %>
                 </p>
             </div>
             <!-- <p>&nbsp;</p> -->
@@ -136,19 +112,18 @@ user_id:<%= current_user.id %><br />
             </div>
 
             <%# 返信された書き込み ここから ####################################################### %>
-            <% @replayposts = @replayposts.where(respost_id: t.id) %>
-            <%#= @replayposts.inspect %>
+            <% @replaypost = @replayposts.where(respost_id: t.id) %>
             <%# if false %>
-            <% @replayposts.each do |t| %>
+            <% @replaypost.each do |replaypost| %>
             <div class="col-sm-12">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
                         <h1 class="panel-title text-center">
-                            <strong><%= t.title %></strong><small class="pull-right">replay_id:<%= t.id %></small>
+                            <strong><%= replaypost.title %></strong><small class="pull-right">replay_id:<%= replaypost.id %></small>
                         </h1>
                     </div>
                     <div class="panel-body">
-                        <% user = @users.find_by(id: t.user_id) %>
+                        <% user = @users.find_by(id: replaypost.user_id) %>
                         <% if user.present? %><%# 投稿したユーザーの存在をチェック %>
                             <div class="col-sm-4">
                                 返信者：<strong><%= user.handlename %></strong> さん
@@ -160,28 +135,28 @@ user_id:<%= current_user.id %><br />
                         <% end %>
                         <div class="col-sm-4">
                             <%# d = t.created_at %>
-                            返信日：<%= t.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %>  
+                            返信日：<%= replaypost.created_at.strftime("%Y年%m月%d日 %H:%M:%S") %>  
                         </div>
                         <div class="col-sm-4">
-                            <% if t.updated_at != t.created_at %><%# 投稿が編集されていれば編集日を表示する %>
-                            編集日：<%= t.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
+                            <% if replaypost.updated_at != replaypost.created_at %><%# 投稿が編集されていれば編集日を表示する %>
+                            編集日：<%= replaypost.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>
                             <% end %>
                         </div>
                         <!-- <p>&nbsp;</p> -->
                         <div class="col-sm-12">
                             <p>
-                            <%= t.content %>
+                            <%= replaypost.content %>
                             </p>
                         </div>
                         <!-- <p>&nbsp;</p> -->
                         <div class="col-sm-12">
                             <p>
-                                <% if current_user.id == t.user_id || current_user.admin? %><%# 投稿者本人のみ編集・削除を可能とする %>
-                                    <%= link_to "返信を編集する",edit_replaypost_path(t.id) %> | 
+                                <% if current_user.id == replaypost.user_id || current_user.admin? %><%# 投稿者本人のみ編集・削除を可能とする %>
+                                    <%= link_to "返信を編集する",edit_replaypost_path(replaypost.id) %> | 
                                     <%#= link_to "削除", t, class: "btnlink btnlink-danger glyphicon glyphicon-trash",
                                         method: :delete, data: {confirm: "本当に削除してもいいですか？"} %>
                                     <%# destroyアクションにforum_idというパラメータを渡して、投稿削除後にこのページへリダイレクトさせる %>
-                                    <%= link_to "削除", replaypost_path(t.id, forum_id: @forum.id), class: "btnlink btnlink-danger glyphicon glyphicon-trash",
+                                    <%= link_to "削除", replaypost_path(replaypost.id, forum_id: @forum.id), class: "btnlink btnlink-danger glyphicon glyphicon-trash",
                                         method: :delete, data: {confirm: "本当に削除してもいいですか？"} %>
                                 <% end %>
                             </p>

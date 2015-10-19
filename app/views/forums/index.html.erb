@@ -6,10 +6,10 @@
 		</h1>
 	</div>
     <div class="panel-body">
-        <% if !current_user.promember? %>
+        <%# if !current_user.promember? %>
             <p>有料会員様のみフォーラムをご利用できます。
             </p>
-        <% end %>
+        <%# end %>
     </div>
     <div class="table-responsive">
     <table class="table table-striped table-bordered">
@@ -30,3 +30,6 @@
     </table>
     </div>
 </div>
+
+
+<%# if user_signed_in? %>

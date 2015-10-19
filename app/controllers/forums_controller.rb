@@ -1,4 +1,5 @@
 class ForumsController < ApplicationController
+    before_action :authenticate_user!, only:[:show]
     before_action :no_promember, only: [:show]
     before_action :admin_user, only: [:create, :update, :destroy]
     

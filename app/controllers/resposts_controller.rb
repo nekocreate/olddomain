@@ -15,11 +15,14 @@ class RespostsController < ApplicationController
             # redirect_to forum_path(params[:respost][:forum_id])
             redirect_to request.referrer || forum_path(params[:respost][:forum_id])
         else
-            # render text: @respost.errors.inspect
-            flash[:danger] = "書き込み失敗" ,"errors", @respost.errors
-            ##### バリデーションのエラーメッセージの表示がうまくいかない
-            @errors = @respost.errors
-            redirect_to request.referrer
+            @forum = Forum.find(params[:respost][:forum_id])
+            @resposts = Respost.order(updated_at: :desc).page(params[:page]).per(5)
+            @replayposts = Replaypost.all
+            @users = User.all
+            flash[:danger] = "書き込み失敗" # ,"errors", @respost.errors
+            ### バリデーションのエラーメッセージを表示させるためには、テンプレートをrenderしてインスタンス変数を渡す必要がある。
+            # redirect_to request.referrer
+            render 'forums/show'
         end
     end
     

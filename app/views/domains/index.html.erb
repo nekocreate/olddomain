@@ -194,8 +194,12 @@
         <% str = domain %>
         <% p = str.index(".") %><%# カンマの位置 %>
         <% chikan_str = str[1..p-2] %><%# domain名の文字列の先頭末尾の文字列を除外して切り取る %>
-        <% fusemoji = "*" %>
-        <% chikan_str.length.times{ fusemoji = fusemoji + "*" } %>
+        <% if chikan_str.length > 14 %><%# 置換する文字数が15個以上の場合は 伏せ文字*の数は15個とする %>
+          <% fusemoji = "***************" %>
+        <% else %>
+          <% fusemoji = "*" %>
+          <% chikan_str.length.times{ fusemoji = fusemoji + "*" } %>
+        <% end %>
         <% domain = domain.gsub(chikan_str,fusemoji) %>
     <% rescue %><% domain = "エラー" %>
     <% end %>

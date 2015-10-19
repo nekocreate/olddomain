@@ -22,13 +22,22 @@ class ReplaypostsController < ApplicationController
         if @replaypost.save
             flash[:success] = "返信を投稿しました。"
             # redirect_to forum_path(params[:replaypost][:forum_id])
-            redirect_to request.referrer || forum_path(params[:respost][:forum_id])
+        ##    redirect_to request.referrer || forum_path(params[:respost][:forum_id])
+            redirect_to forum_path(params[:replaypost][:forum_id])
         else
+            # render text: params
+            @replayposts = Replaypost.all
+            @forum = Forum.find(params[:replaypost][:forum_id])
+            @respost = Respost.find(params[:replaypost][:respost_id])
+            @users = User.all
+            #@user = User.find(params[:replaypost][:user_id])
             # render text: @replaypost.errors.inspect
-            flash[:danger] = "返信の投稿失敗" ,"errors", @replaypost.errors
+            flash[:danger] = "返信の投稿失敗"
             ##### バリデーションのエラーメッセージの表示がうまくいかない
-            @errors = @replaypost.errors
-            redirect_to request.referrer
+            #@errors = @replaypost.errors
+            #redirect_to request.referrer
+            
+            render 'replayposts/new'
         end
     end
     

@@ -1,3 +1,54 @@
+取得可：ai-tpm.com<br />
+取得不可：stringzwingz.com<br />
+http://www.webservicex.net/whois.asmx/GetWhoIS?HostName=
+
+<% require 'open-uri' %>
+
+<%############### .com .net の場合 ################################################################################ %>
+<% check_domain = 'stringzwingz.com' %>
+<%# check_domain = 'ai-tpm.com' %>
+<% check_status = 'Status: ok' %>
+<% check_str1 = 'Domain Name: ' %>
+<% check_str2 = 'No match for "' %>
+
+<% url = 'http://www.webservicex.net/whois.asmx/GetWhoIS?HostName=' + check_domain %>
+<%# user_agentの偽装 %>
+<% user_agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.63 Safari/537.36' %>
+<% charset = nil %>
+<% html = open(url, "User-Agent" => user_agent) do |f| %>
+  <% charset = f.charset %><%# 文字種別を取得 %>
+  <% f.read %>
+<% end %>
+
+<%= html %>
+<br />
+
+<% if html.downcase.include?(check_str1.downcase + check_domain.downcase) %><%# Domain Name: STRINGZWINGZ.COM %>
+    <%# true なら取得不可 false なら取得可 %>
+    <%= p = html.downcase.include?(check_status.downcase) %>
+    <% if p = false %>
+        <span style="background-color:#FFCACA;">取得可</span>
+    <% else %>
+        <span style="background-color:#FFCACA;">取得不可</span>
+    <% end %>
+<% end %>
+
+<% if html.downcase.include?(check_str2.downcase + check_domain.downcase + '"') %><%# No match for "AI-TPM.COM" %>
+    <span style="background-color:#FFCACA;">取得可</span>
+<% end %>
+<%############### .com .net の場合 ################################################################################ %>
+
+
+
+
+
+
+
+<hr>
+
+
+
+
 
 Respost.all:<%= Respost.all.inspect %>
 <hr />
